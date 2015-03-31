@@ -13,5 +13,5 @@
 	meta = black bold
 
 [credential]
-	helper = !'C:\\Users\\eye\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
+	helper = !'git-credential-winstore.exe'
 

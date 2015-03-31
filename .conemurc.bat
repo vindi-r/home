@@ -13,6 +13,8 @@
 @set PATH=%PATH%;.\node_modules\.bin
 ::* MongoDB
 @set PATH=%PATH%;C:\Program Files\MongoDB 2.6 Standard\bin
+::* git credentials store helper
+@set PATH=%PATH%;%APPDATA%\GitCredStore
 
 ::* Linux tools like 'ls' and 'ssh' are installed with 'git' and it's a
 ::  best pack since provided 'ssh' is a real 'ssh', not a 'putty' with
