@@ -1,0 +1,13 @@
+##  Global snippets
+
+snippet (c)
+	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
+snippet date
+	`strftime("%Y-%m-%d")`
+snippet uuid
+	`system( "python -c \"import uuid; print( uuid.uuid4() )\"" )`${1}
+snippet file
+	`expand('%:t')`
+  
+##! No empty line or it will be included into last snippet.
+
