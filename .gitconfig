@@ -1,0 +1,17 @@
+[user]
+  name = Grigory Petrov
+  email = grigory.v.p@gmail.com
+[format]
+  pretty = oneline
+[core]
+  editor = vim
+  autocrlf = input
+  safecrlf = false
+[push]
+  default = simple
+[color "diff"]
+	meta = black bold
+
+[credential]
+	helper = !'C:\\Users\\eye\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
+
