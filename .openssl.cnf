@@ -1,0 +1,7 @@
+[ req ]
+distinguished_name = req_distinguished_name
+
+[ req_distinguished_name ]
+countryName = Country Name (2 letter code)
+countryName_default = RU
+
