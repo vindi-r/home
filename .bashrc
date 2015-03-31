@@ -5,8 +5,6 @@
 export CLICOLOR=1
 ##  |ls| is one column by default, as in powershell.
 alias ls='ls -l --color'
-alias pyproject='python ~/tools/project.py'
-alias pyssh='python ~/tools/ssh.py'
 ##  Don't create |.pyc| files while executing python code from console.
 export PYTHONDONTWRITEBYTECODE=1
 ##* Required for |pip| and |easy_install| to work without |sudo|.
