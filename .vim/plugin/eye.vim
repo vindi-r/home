@@ -241,9 +241,7 @@ endf
 
 
 fu! EyeXiOpen()
-  call <SID>focusNonsysWnd()
-  call EyeBufClose()
-  e ~/Dropbox/info/kb_my/index.xi
+  call EyeOpenFile('~/Dropbox/info/kb_my/index.xi')
   cd ~/Dropbox/info/kb_my
 endf
 
