@@ -20,6 +20,7 @@ endf
 
 ""x Opens new buffer with same working dir as current one.
 fu! EyeBufNew()
+  call <SID>focusNonsysWnd()
   let l:sCwd = getcwd()
   :enew
   exec "cd " . l:sCwd
