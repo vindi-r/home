@@ -247,11 +247,10 @@ endf
 
 
 fu! EyeXiNew()
-  call <SID>focusNonsysWnd()
   call EyeBufNew()
-  e ~/Dropbox/info/kb_my/index.xi
-  cd ~/Dropbox/info/kb_my
+  call EyeXiOpen()
 endf
+
 
 let g:nEyeNerdTreeVisible=0
 fu! EyeTreeToggle()
