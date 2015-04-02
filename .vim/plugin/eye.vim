@@ -83,39 +83,39 @@ endf
 ""i Optional command to execute after buffer is deleted.
 fu! EyeBufClose( ... )
 
-  fu! EyeBufCloseFin( s_msg, ... )
-    let l:fFailure = 0
+  fu! EyeBufCloseFin( msg, ... )
+    let l:isFailure = 0
     if a:0 > 0
       try
         exec a:1
       catch /.*/
-        let l:fFailure = 1
+        let l:isFailure = 1
       endtry
     endif
-    if l:fFailure
+    if l:isFailure
       redraw
       call <SID>msg( "operation failed", 'warn' )
-    elseif a:s_msg != ""
+    elseif a:msg != ""
       redraw
-      call <SID>msg( a:s_msg )
+      call <SID>msg( a:msg )
     endif
   endf
 
   ""* Remember current buffer number, window etc.
-  let l:nBuf = bufnr( '%' )
-  let l:nWnd = winnr()
-  let l:sCwd = getcwd()
+  let l:bufNr = bufnr( '%' )
+  let l:winNr = winnr()
+  let l:cwd = getcwd()
 
-  ""  Don't close special buffers that are user interface
+  ""  Don't close special buffers that are user interface.
   if <SID>isBufSys( bufnr( '%' ) )
     call <SID>msg( "will not close sys buffer", 'warn' )
     return
   endif
 
   ""  Loop other windows
-  for i in range( l:nWnd + 1, winnr( '$' ) ) + range( l:nWnd - 1, 1, -1 )
+  for i in range( l:winNr + 1, winnr( '$' ) ) + range( l:winNr - 1, 1, -1 )
     ""  Other window displays same buffer as current one?
-    if l:nBuf == winbufnr( i )
+    if l:bufNr == winbufnr( i )
       ""  If two windows displays same buffer, closing this buffer will
       ""  close second window. Executing 'enew' in current window will
       ""  display empty buffer in it without closing.
@@ -124,14 +124,14 @@ fu! EyeBufClose( ... )
     endif
   endfor
   ""  Find nearest visible buffer that is not part of UI.
-  for i in range( l:nBuf + 1, bufnr( '$' ) ) + range( l:nBuf - 1, 1, -1 )
+  for i in range( l:bufNr + 1, bufnr( '$' ) ) + range( l:bufNr - 1, 1, -1 )
     if buflisted( i ) && ! <SID>isBufSys( i )
       exec "buffer " . i
       ""! If previous buffer was new empty buffer - it's auto deleted after
       ""  jump.
-      if buflisted( l:nBuf )
+      if buflisted( l:bufNr )
         ""  Remove previous buffer.
-        exec "bd " . l:nBuf
+        exec "bd " . l:bufNr
       endif
       return call( 'EyeBufCloseFin', [ "buffer closed" ] + a:000 )
     endif
@@ -140,9 +140,9 @@ fu! EyeBufClose( ... )
   ""  only one. Create empty buffer (so closing current one will not close
   ""  VIM or break window order) and close current one.
   enew
-  exec "bd " . l:nBuf
+  exec "bd " . l:bufNr
   ""! Otherwise we will jupm to OS root.
-  exec "cd " . l:sCwd
+  exec "cd " . l:cwd
   return call( 'EyeBufCloseFin', [ "last buffer closed" ] + a:000 )
 endf
 
@@ -214,15 +214,15 @@ fu! EyeOpenFile( s_file )
   call <SID>focusNonsysWnd()
   let l:sFilePath = fnamemodify( a:s_file, ":p" )
   ""  Remember current buffer number.
-  let l:nBuf = bufnr( '%' )
+  let l:bufNr = bufnr( '%' )
   ""  Open file in new buffer. This also adds current buffer to jumplist
   ""  So user can jump back with |C-O|.
   exec "e " . l:sFilePath
   ""! If previous buffer was new empty buffer - it's auto deleted after
   ""  opening new file.
-  if buflisted( l:nBuf ) && bufnr( '%' ) != l:nBuf
+  if buflisted( l:bufNr ) && bufnr( '%' ) != l:bufNr
     ""  Remove previous buffer.
-    exec "bd " . l:nBuf
+    exec "bd " . l:bufNr
   endif
 endf
 
@@ -297,19 +297,19 @@ endf
 
 
 fu! EyeJumpPrev()
-  let l:nBuf = bufnr( '%' )
+  let l:bufNr = bufnr( '%' )
   exec 'normal!' 1 "\<C-o>"
-  if buflisted( l:nBuf ) && bufnr( '%' ) != l:nBuf
-    exec "bd " . l:nBuf
+  if buflisted( l:bufNr ) && bufnr( '%' ) != l:bufNr
+    exec "bd " . l:bufNr
   endif
 endf
 
 
 fu! EyeJumpNext()
-  let l:nBuf = bufnr( '%' )
+  let l:bufNr = bufnr( '%' )
   exec 'normal!' 1 "\<C-i>"
-  if buflisted( l:nBuf ) && bufnr( '%' ) != l:nBuf
-    exec "bd " . l:nBuf
+  if buflisted( l:bufNr ) && bufnr( '%' ) != l:bufNr
+    exec "bd " . l:bufNr
   endif
 endf
 
