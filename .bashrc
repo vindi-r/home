@@ -60,6 +60,6 @@ alias gp='git push'
 alias gu='git pull'
 
 ## cd aliases (for consistency with win that don't have ~).
-alias cdh=cd ~
-alias cdd=cd ~\Documents
+alias cdh='cd ~'
+alias cdd='cd ~\Documents'
 
