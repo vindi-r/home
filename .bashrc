@@ -40,6 +40,7 @@ if test "$(uname)" == "Darwin"; then
 else
   ##FIXME: Seems not persisting on Ubuntu, need to check why.
   # setterm -background black -foreground white
+  true
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
