@@ -38,7 +38,8 @@ if test "$(uname)" == "Darwin"; then
   ##  64-bit that is not compatible with wxWidgets.
   alias python="arch -i386 /usr/bin/python2.7 -B"
 else
-  setterm -background black -foreground white
+  ##FIXME: Seems not persisting on Ubuntu, need to check why.
+  # setterm -background black -foreground white
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
