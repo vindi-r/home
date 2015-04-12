@@ -3,6 +3,8 @@ syn match hi_brace "[(){}\[\]<>]"
 hi link hi_op    Operator
 syn match hi_op "[+\-*%^&<>=$!:;.,?]"
 syn match hi_op "/[^/]"
+syn match hi_op "||"
+syn match hi_op "&&"
 syn keyword hi_accent _this
 syn keyword Statement this var new function typeof true false prototype
   \ console NaN
