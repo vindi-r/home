@@ -10,8 +10,5 @@
 [push]
   default = simple
 [color "diff"]
-	meta = black bold
-
-[credential]
-	helper = !'git-credential-winstore.exe'
+  meta = black bold
 
