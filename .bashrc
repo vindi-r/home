@@ -38,7 +38,9 @@ if test "$(uname)" == "Darwin"; then
   ##  64-bit that is not compatible with wxWidgets.
   alias python="arch -i386 /usr/bin/python2.7 -B"
 else
-  setterm -background black -foreground white
+  ##FIXME: Seems not persisting on Ubuntu, need to check why.
+  # setterm -background black -foreground white
+  true
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
@@ -46,7 +48,7 @@ fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ##  git aliases
-alias gl='git log --color --graph --pretty=format:"%%Cred%%h%%Creset -%%C(yellow)%%d%%Creset %%s %%Cgreen(%%cr) %%C(bold blue)<%%an>%%Creset" --abbrev-commit'
+alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias gs='git status'
 alias ga='git add -N'
 alias gb='git branch'
@@ -60,6 +62,6 @@ alias gp='git push'
 alias gu='git pull'
 
 ## cd aliases (for consistency with win that don't have ~).
-alias cdh=cd %userprofile%
-alias cdd=cd %userprofile%\Documents
+alias cdh='cd ~'
+alias cdd='cd ~/Documents'
 
