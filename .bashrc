@@ -65,3 +65,9 @@ alias gu='git pull'
 alias cdh='cd ~'
 alias cdd='cd ~/Documents'
 
+##  Backspace to caps lock.
+setxkbmap -option caps:backspace
+
+##  Chrome cache size for ramdisks.
+export CHROME_USER_FLAGS="--disk-cache-size=100000000"
+
