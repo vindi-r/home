@@ -70,5 +70,6 @@ setxkbmap -option caps:backspace
 
 ##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
 ##  Disable disk cache so multiple chrome instances will not kill HDD.
-alias chrome='GTK_IM_MODULE="" /opt/google/chrome/chrome --disk-cache-size=1'
+CHROME_BIN=/opt/google/chrome/chrome
+alias chrome='GTK_IM_MODULE="" $CHROME_BIN --disk-cache-size=10000000'
 
