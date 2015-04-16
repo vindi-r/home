@@ -68,6 +68,7 @@ alias cdd='cd ~/Documents'
 ##  Backspace to caps lock.
 setxkbmap -option caps:backspace
 
-##  Chrome cache size for ramdisks.
-export CHROME_USER_FLAGS="--disk-cache-size=100000000"
+##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
+##  Disable disk cache so multiple chrome instances will not kill HDD.
+alias chrome='GTK_IM_MODULE="" /opt/google/chrome/chrome --disk-cache-size=1'
 

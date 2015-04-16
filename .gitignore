@@ -300,4 +300,8 @@ rebar/
 handgun/
 .azure/
 Tracing/
+.TelegramDesktop/
+.xinputrc
+fontconfig/
+tmp/
 
