@@ -370,17 +370,17 @@ fu! EyeAg( args )
   let l:sGrepProg = &grepprg
   let l:sGrepFormat = &grepformat
   try
-    let l:sCmd = 'ag --nocolor --nogroup --column'
-    ""  Case-sensitive?
-    if a:args =~ '/c$'
-      let l:sQuery = a:args[ 0 : -3 ]
-    else
-      let l:sCmd .= ' --ignore-case'
-      let l:sQuery = a:args
-    endif
-    let &grepprg = l:sCmd
+    let &grepprg = 'ag'
     let &grepformat = '%f:%l:%c:%m'
-    silent execute 'grep! "' . l:sQuery . '"'
+    ""  Since no quotes, additional options can be passed directly,
+    ""  like '-s' for case-sensetive or '-G' to search in files.
+    ""! If '-G' is used, ag will use ignore-case for it. In order to
+    ""  use ignore case for query, add second '--ignore-case'/'-i'
+    ""  after '-G', ex:
+    ""  |{lng:ag}
+    ""  | ag --nocolor --ignore-case -G django -i collection
+    let l:options = '--nocolor --nogroup --column --ignore-case'
+    silent execute 'grep! ' . l:options . ' ' . a:args
   finally
     let &grepprg = l:sGrepProg
     let &grepformat = l:sGrepFormat
