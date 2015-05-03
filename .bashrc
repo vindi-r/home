@@ -65,8 +65,8 @@ alias gu='git pull'
 alias cdh='cd ~'
 alias cdd='cd ~/Documents'
 
-##  Backspace to caps lock.
-setxkbmap -option caps:backspace
+##  Remap caps lock to backspace.
+gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace']"
 
 ##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
 ##  Disable disk cache so multiple chrome instances will not kill HDD.

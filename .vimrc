@@ -83,8 +83,8 @@ if v:version >= 703
   ""  Dir to save undo.
   set undodir=$TMP/.vim/undo
   ""! Undo dir must exists, otherwise undo will not work.
-  if !isdirectory( &undodir )
-    call mkdir( &undodir, 'p' )
+  if !isdirectory(&undodir)
+    call mkdir(&undodir, 'p')
   endif
   ""  How many undo to keep.
   set undolevels=1000

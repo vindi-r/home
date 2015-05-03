@@ -158,7 +158,7 @@ fu! EyeCd( ... )
     ""  Use '.' to denote 'current file path'.
     if l:sPath == '.'
       let l:sPath = expand( '%:p:h' )
-      if l:sPath =~ "[\\/]kb_my$"
+      if l:sPath =~ "[\\/]kb$"
         return <SID>msg( "will not cd into wiki, too huge", 'warn' )
       endif
     endif
@@ -242,8 +242,8 @@ endf
 
 
 fu! EyeXiOpen()
-  call EyeOpenFile('~/Dropbox/info/kb_my/index.xi')
-  cd ~/Dropbox/info/kb_my
+  call EyeOpenFile('~/Dropbox/kb/index.xi')
+  cd ~/Dropbox/kb
 endf
 
 
