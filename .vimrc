@@ -361,6 +361,14 @@ nmap ,x <Plug>BookmarkClearAll
 ""  .jade syntax highlight
 Plugin 'digitaltoad/vim-jade'
 
+""  Per-project editor configuration.
+""  |{lng:ini;file:.editorconfig}
+""  | root = true
+""  | [*.php]
+""  | indent_style = tab
+""  | indent_size = 2
+Plugin 'editorconfig/editorconfig-vim'
+
 call vundle#end()
 filetype plugin on
 
