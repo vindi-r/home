@@ -304,4 +304,11 @@ Tracing/
 .xinputrc
 fontconfig/
 tmp/
+.gnupg/
+.nv/
+.nviminfo
+.nvimlog
+.openshift/
+.remmina/
+.tsd-cache/
 

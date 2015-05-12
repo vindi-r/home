@@ -114,6 +114,9 @@ set ignorecase
 set incsearch
 "" If search hit bottom/top it will not wrap
 set nowrapscan
+"" Space is batter 'leader' key than '\'.
+let mapleader=" "
+
 "" Used to increas/decrease font size with |M-Q| and |M-A|.
 if has("win32")
   ""  Get current DPI.
@@ -225,10 +228,6 @@ Plugin 'fholgado/minibufexpl.vim'
 ""* Don't try to open buffers in windows with non-modifiable flag like
 ""  NERDTree or minibufexpl.
 let g:miniBufExplModSelTarget = 1
-""* No 'press ? for help' and 'Bookmarks' labels.
-let NERDTreeMinimalUI=1
-noremap <C-Tab> :MBEbn<CR>
-noremap <S-Tab> :MBEbp<CR>
 
 ""  Run bash/powershell/gdb inside vim.
 ""! Vim python support not compatible with ActivePython. Shell itself
@@ -293,6 +292,8 @@ Plugin 'scrooloose/nerdtree'
 let NERDTreeDirArrows = 1
 ""  Change CWD if NERDTree root has changed.
 let NERDTreeChDirMode = 2
+""* No 'press ? for help' and 'Bookmarks' labels.
+let NERDTreeMinimalUI=1
 ""  Don't show some files in 'Documents', '~' on win. Defined by regexp.
 let NERDTreeIgnore = [
   \ 'Android',
@@ -327,15 +328,12 @@ if has("win32")
   let g:tagbar_ctags_bin='~/apps/ctags/ctags.exe'
 endif
 let g:tagbar_width = 50
-nnoremap <leader>t :TagbarToggle<cr>
 
 ""  Mass comment/uncomment.
 Plugin 'scrooloose/nerdcommenter'
 
 ""  Adds commands to toggle quickfix/error window and locations window.
 Plugin 'milkypostman/vim-togglelist'
-nnoremap <leader>l :call ToggleLocationList()<CR>
-nnoremap <leader>q :call ToggleQuickfixList()<CR>
 
 ""  Changes background colors so indents are visible.
 let g:indent_guides_auto_colors = 0
@@ -384,24 +382,42 @@ command ENEW :call EyeBufNew()
 command -nargs=? -complete=file CD :call EyeCd( <f-args> )
 command -nargs=? -complete=file CDH :call EyeCd('~')
 command -nargs=? -complete=file CDD :call EyeCd('~\Documents')
-nnoremap <leader>ee :call EyeTreeToggle()<cr>
-nnoremap <leader>ef :call EyeTreeFind()<cr>
-nnoremap <leader>eb :Bookmark<cr>
 command -nargs=1 -complete=file E :call EyeOpenFile( <f-args> )
 command VS :call EyeVerticalSplit()
 nnoremap <silent> <C-o> :call EyeJumpPrev()<cr>
 nnoremap <silent> <C-i> :call EyeJumpNext()<cr>
-nnoremap <leader>[ :call EyeErrPrev()<cr>
-nnoremap <leader>] :call EyeErrNext()<cr>
 command W :call EyeBufferSave()
-nnoremap <leader>xv :call EyeExecViml()<cr>
 command! -bang -nargs=* -complete=file Ack :call EyeAg(<q-args>)
-nnoremap <leader>a :Ack<space>
+""  Better split navigation.
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 ""  Disable closing all windows - NERDTree and minibufexplorer are intended
 ""  to be always opened.
 map <C-W><C-O> <C-W><C-_>
 map <C-W>o <C-W><C-_>
 
+nnoremap <leader>j :MBEbn<cr>
+nnoremap <leader>k :MBEbp<cr>
+nnoremap <leader>t :TagbarToggle<cr>
+nnoremap <leader>l :call ToggleLocationList()<CR>
+nnoremap <leader>q :call ToggleQuickfixList()<CR>
+nnoremap <leader>ee :call EyeTreeToggle()<cr>
+nnoremap <leader>ef :call EyeTreeFind()<cr>
+nnoremap <leader>eb :Bookmark<cr>
+nnoremap <leader>[ :call EyeErrPrev()<cr>
+nnoremap <leader>] :call EyeErrNext()<cr>
+nnoremap <leader>xv :call EyeExecViml()<cr>
+nnoremap <leader>a :Ack<space>
+nnoremap <leader>fj :call EyeFontInc()<cr>
+nnoremap <leader>fk :call EyeFontDec()<cr>
+nnoremap <leader>y "+y
+nnoremap <leader>d "+d
+vnoremap <leader>y "+y
+vnoremap <leader>d "+d
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 
 ""@ Indentation.
 
@@ -485,8 +501,6 @@ function EyeFontDec()
   call FontUpdate()
   echo "Font size: " . s:g_nFontSize
 endf
-nmap <M-q> :call EyeFontInc()<cr>
-nmap <M-a> :call EyeFontDec()<cr>
 
 ""  Display highlight group of item under cursor
 function ShowHi()
