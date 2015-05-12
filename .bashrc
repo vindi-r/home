@@ -80,3 +80,7 @@ alias venv='\
   &&\
   source env/bin/activate'
 
+source ~/.git-prompt.sh
+
+export PS1="\\e[37m\\W\\e[32m\\$(__git_ps1)\\e[33m \\$ \\e[37m"
+
