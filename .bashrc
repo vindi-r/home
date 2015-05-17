@@ -7,9 +7,6 @@ export CLICOLOR=1
 alias ls='ls -l --color'
 ##  Don't create |.pyc| files while executing python code from console.
 export PYTHONDONTWRITEBYTECODE=1
-##* Required for |pip| and |easy_install| to work without |sudo|.
-export PATH=$PATH:~/.local/bin
-export PYTHONPATH=$PYTHONPATH:~/.local/python-site-packages
 ##* Usefull for npm tools that are not installed globally
 export PATH=$PATH:./node_modules/.bin
 ##  git can clone from repos without certificates.
