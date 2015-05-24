@@ -367,6 +367,9 @@ Plugin 'digitaltoad/vim-jade'
 ""  | indent_size = 2
 Plugin 'editorconfig/editorconfig-vim'
 
+""  Better CSS syntax highlighting.
+Plugin 'hail2u/vim-css3-syntax'
+
 call vundle#end()
 filetype plugin on
 
