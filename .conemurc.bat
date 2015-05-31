@@ -48,8 +48,16 @@
 ::  Alias for grunt server with no "terminate command prompt".
 @doskey srv=grunt serve < nul
 
+::  Virtualenv launcher
+@doskey venv=(^
+  @if not exist "env" (^
+    virtualenv --no-site-packages env^
+  )^
+)
+
 ::! Use '-cur_console:R' so 'eye_prompt_curdir' can be exported.
 PROMPT $E[37;40m$E]9;7;"cmd -cur_console:R /c %~dp0.conemu_prompt.bat"$E\$E]9;8;"eye_prompt_curdir"$E\$E[32;40m$E]9;8;"eye_prompt_branch"$E\$E[34;40m$E]9;8;"eye_prompt_commits"$E\$E[31;40m$E]9;8;"eye_prompt_modified"$E\$E[33;40m $$ $E[37;40m
 
 @cls
+@goto :eof
 
