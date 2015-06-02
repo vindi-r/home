@@ -50,21 +50,21 @@ syn match hi_xi_warn    "^ *! "
 syn match hi_xi_unsure  "^ *? "
 
 syn match hi_xi_par_start  "^ *[.\-*#=] [^ ]"me=e-1
-" '|' symbol preceding code. Separate match is used instead of
-" 'matchgroup' inside hi_xi_code so complex construction like
-" '. | code' can be highlighted with 3 separate groups: hi_xi_par_start,
-" hi_xi_code_prefix and hi_xi_code. This can't be done via 'matchgroup'
-" since it's no way to match leading '.' (hi_xi_par_start) inside
-" 'matchgroup'.
+""  '|' symbol preceding code. Separate match is used instead of
+""  'matchgroup' inside hi_xi_code so complex construction like
+""  '. | code' can be highlighted with 3 separate groups: hi_xi_par_start,
+""  hi_xi_code_prefix and hi_xi_code. This can't be done via 'matchgroup'
+""  since it's no way to match leading '.' (hi_xi_par_start) inside
+""  'matchgroup'.
 syn match hi_xi_code_prefix '^ *\(. \)\?|' contained contains=hi_xi_par_start
-"" . |{lang:ruby}
+""  . |{lang:ruby}
 ""! Non-space character after |{| is required since meta requires characters
 ""  after |{| and before |}| to allow writing non-meta strings via spaces,
 ""  like |{ }| ("{ }" marked as non-text, no meta).
 syn match hi_xi_code_meta '^ *\(. \)\?|{[^ }][^}]*}$' contains=hi_xi_par_start
-"n Modificators after regions start-stop regexp are required so limit char
-"  after/before region start (ex "not a space and not a '|') will not
-"  be highlighted via 'matchgroup'.
+""n Modificators after regions start-stop regexp are required so limit char
+""  after/before region start (ex "not a space and not a '|') will not
+""  be highlighted via 'matchgroup'.
 syn region hi_xi_accent matchgroup=hi_fg_hide start='`[^ `]'rs=s+1 end='[^ `]`'re=e-1 end='$' oneline
 syn region hi_xi_link   matchgroup=hi_fg_hide start='\[[^ \]]'rs=s+1 end='[^ \[]\]'re=e-1 oneline
 ""  Function parameter.
@@ -80,7 +80,7 @@ syn region hi_xi_code matchgroup=hi_fg_hide start='{[^ ]'rs=s+1 end='[^ ]}'re=e-
 ""  Text between | and | that contains | as first symbol and is not code
 ""  fragment like ||Lint a = ;|. Example of such construct is ||| or ||text||.
 syn region hi_xi_nontxt matchgroup=hi_fg_hide start='||[^A-Z#ξj]'rs=s+1 end='[^ ]|[^|]\@='re=e-1 end='|$' end='$' oneline
-"n hi_xi_nontxt and hi_xi_code are distinguished by space after '|'
+""n hi_xi_nontxt and hi_xi_code are distinguished by space after '|'
 syn region hi_xi_code start='^\s*\(. \|! \)\?|\( \|$\)' end='$' contains=hi_xi_code_prefix oneline keepend
 ""  |{lang:python}a = 1|
 ""! Non-space character after |{| is required since meta requires characters
@@ -90,9 +90,9 @@ syn region hi_xi_code start='^\s*\(. \|! \)\?|\( \|$\)' end='$' contains=hi_xi_c
 ""  non-text characters, not code.
 syn region hi_xi_code matchgroup=hi_fg_hide start='|{[^ }][^}]*}[^|]\@=' end='[^ |]|'re=e-1 end='$' oneline
 
-" headings after rest of syntax to override it. For example,
-" | # .
-" will be colored like heading 1, not like paragraph start.
+""  headings after rest of syntax to override it. For example,
+""  | # .
+""  will be colored like heading 1, not like paragraph start.
 syn match hi_xi_ht "^[^ ].* @$" contains=hi_xi_end
 syn match hi_xi_h1 "^[^ ].* \.$" contains=hi_xi_end
 syn match hi_xi_h2 "^ \{2\}[^ ].* \.$" contains=hi_xi_end
@@ -108,6 +108,6 @@ syn match hi_xi_h4_link '^ \{6\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
 syn match hi_xi_link_end '[^ ]\[\] \.$'ms=s+1 contains=hi_xi_end contained
 syn match hi_xi_end ' \(\.\|@\)$' contained
 
-" Synchronize syntax by looking 1 lines back (xi have no multiline syntax).
+""  Synchronize syntax by looking 1 lines back (xi have no multiline syntax).
 syntax sync minlines=1
 
