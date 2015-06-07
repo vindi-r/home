@@ -183,8 +183,8 @@ set guicursor+=n:block-Cursor-blinkwait100-blinkon100-blinkoff100
 set nowrap
 ""  Backspace deletes chars
 set backspace=indent,eol,start
-""  Highlight all search matches.
-" set hlsearch
+""  Don' highlight all search matches (defaults for Fedora).
+set nohlsearch
 "" Language map so normal mode commands will work in RU locale.
 " set langmap=ЙQ
 " set spell
