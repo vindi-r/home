@@ -149,7 +149,7 @@ if has("win32")
 elseif has( "mac" )
   let s:g_nFontSize = 12
 elseif has( "unix" )
-  let s:g_nFontSize = 9
+  let s:g_nFontSize = 16
 endif
 
 function FontUpdate()
