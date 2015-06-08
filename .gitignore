@@ -312,4 +312,5 @@ tmp/
 .remmina/
 .tsd-cache/
 .sudo_as_admin_successful
+.wine/
 
