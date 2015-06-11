@@ -13,6 +13,7 @@ hi default link hi_heading_1 question
 hi default link hi_heading_2 statement
 hi default link hi_heading_3 title
 hi default link hi_heading_4 warningmsg
+hi default link hi_heading_5 hi_preproc
 hi default link hi_accent    specialkey
 hi default link hi_link      nontext
 hi default link hi_fg_hide   ignore
@@ -29,6 +30,8 @@ hi link hi_xi_h3          hi_heading_3
 hi link hi_xi_h3_link     hi_heading_3
 hi link hi_xi_h4          hi_heading_4
 hi link hi_xi_h4_link     hi_heading_4
+hi link hi_xi_h5          hi_heading_5
+hi link hi_xi_h5_link     hi_heading_5
 hi link hi_xi_accent      hi_accent
 hi link hi_xi_link        hi_link
 hi link hi_xi_link_lt     hi_fg_hide
@@ -98,6 +101,7 @@ syn match hi_xi_h1 "^[^ ].* \.$" contains=hi_xi_end
 syn match hi_xi_h2 "^ \{2\}[^ ].* \.$" contains=hi_xi_end
 syn match hi_xi_h3 "^ \{4\}[^ ].* \.$" contains=hi_xi_end
 syn match hi_xi_h4 "^ \{6\}[^ ].* \.$" contains=hi_xi_end
+syn match hi_xi_h5 "^ \{8\}[^ ].* \.$" contains=hi_xi_end
 
 ""  Headers with embedded links.
 ""! Lookeahed assertion to match only if line contains region end.
@@ -105,6 +109,7 @@ syn match hi_xi_h1_link '^[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
 syn match hi_xi_h2_link '^ \{2\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
 syn match hi_xi_h3_link '^ \{4\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
 syn match hi_xi_h4_link '^ \{6\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
+syn match hi_xi_h5_link '^ \{8\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
 syn match hi_xi_link_end '[^ ]\[\] \.$'ms=s+1 contains=hi_xi_end contained
 syn match hi_xi_end ' \(\.\|@\)$' contained
 
