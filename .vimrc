@@ -296,7 +296,6 @@ let NERDTreeChDirMode = 2
 let NERDTreeMinimalUI=1
 ""  Don't show some files in 'Documents', '~' on win. Defined by regexp.
 let NERDTreeIgnore = [
-  \ 'Android',
   \ 'Diablo III',
   \ 'My Music',
   \ 'My Pictures',

@@ -73,7 +73,7 @@ hi hi_sand_b        guifg=#F0F080 gui=bold
 hi hi_title         guifg=#3AD900 gui=bold
 " Quoted string color.
 hi hi_string        guifg=#F04080
-" Preprocessor directives
+" Preprocessor directives, heading 5 in xi.
 hi hi_preproc       guifg=#6699CC gui=bold
 
 " Unused

@@ -20,6 +20,13 @@ fi
 if test -z $TEMP; then
   export TEMP=~/tmp
 fi
+##  Required for Android Studio
+if test -z $JAVA_HOME; then
+  ##  Fedora?
+  if test -e /etc/alternatives/java_sdk; then
+    export JAVA_HOME=/etc/alternatives/java_sdk
+  fi
+fi
 
 ##  OSX?
 if test "$(uname)" == "Darwin"; then
