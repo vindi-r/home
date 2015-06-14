@@ -27,6 +27,8 @@ if test -z $JAVA_HOME; then
     export JAVA_HOME=/etc/alternatives/java_sdk
   fi
 fi
+##  gnome-ssh-askpass don't work.
+unset SSH_ASKPASS
 
 ##  OSX?
 if test "$(uname)" == "Darwin"; then
