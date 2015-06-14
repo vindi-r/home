@@ -11,6 +11,13 @@ endif
 let g:colors_name = "darkness"
 
 " ----------------------------------------------------------------------------
+" Free colors
+" ----------------------------------------------------------------------------
+
+" Shades of gray are used in comments, but where are no comments in XI,
+" so they can be used for something usefull like additional paragraph level.
+
+" ----------------------------------------------------------------------------
 " Base colors.
 " ----------------------------------------------------------------------------
 
