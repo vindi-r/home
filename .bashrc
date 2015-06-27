@@ -44,6 +44,9 @@ if test "$(uname)" == "Darwin"; then
   ##  64-bit that is not compatible with wxWidgets.
   alias python="arch -i386 /usr/bin/python2.7 -B"
 else
+  ##  Remap caps lock to backspace.
+  # gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace']"
+
   ##FIXME: Seems not persisting on Ubuntu, need to check why.
   # setterm -background black -foreground white
   true
@@ -70,9 +73,6 @@ alias gu='git pull'
 ## cd aliases (for consistency with win that don't have ~).
 alias cdh='cd ~'
 alias cdd='cd ~/Documents'
-
-##  Remap caps lock to backspace.
-gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace']"
 
 ##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
 ##  Disable disk cache so multiple chrome instances will not kill HDD.

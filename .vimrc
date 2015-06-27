@@ -147,7 +147,7 @@ if has("win32")
   endif
 ""! Check OSX before NIX since |has("unix")| is |1| on OSX.
 elseif has( "mac" )
-  let s:g_nFontSize = 12
+  let s:g_nFontSize = 16
 elseif has( "unix" )
   let s:g_nFontSize = 16
 endif
