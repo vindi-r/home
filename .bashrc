@@ -89,12 +89,12 @@ alias cdd='cd ~/Documents'
 CHROME_BIN=/opt/google/chrome/chrome
 alias chrome='GTK_IM_MODULE="" $CHROME_BIN --disk-cache-size=10000000'
 
-alias venv='\
-  if ! test -d env; then\
-    virtualenv --no-site-packages env;\
-  fi\
-  &&\
-  source env/bin/activate'
+venv() {
+  if ! test -d ./.env; then
+    virtualenv --no-site-packages ./.env;
+  fi
+  source ./.env/bin/activate
+}
 
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true

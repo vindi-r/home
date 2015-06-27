@@ -316,6 +316,7 @@ let NERDTreeIgnore = [
   \ '^NTUSER.DAT',
   \ '^ntuser.pol',
   \ '^ntuser.ini',
+  \ '.\+\.egg-info',
   \ '_viminfo'
 \ ]
 
@@ -565,10 +566,17 @@ if &diff
   au BufRead *.tmp set filetype=cpp
 else
   if v:version >= 703
-    ""  Version 7.3+ has right margin, so set with do ~half of 1280 pixels.
-    set lines=30 columns=86
+    ""  Number of lines for macbook 12 2005
+    set lines=39
+    if has( "mac" )
+      ""  Number of columns for macbook 12 2005
+      columns=88
+    else
+      ""  Version 7.3+ has right margin, so set with do ~half of 1280 pixels.
+      columns=86
+    endif
   else
-    set lines=30 columns=78
+    set lines=39 columns=78
   endif
 endif
 
