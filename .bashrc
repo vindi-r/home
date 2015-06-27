@@ -3,8 +3,6 @@
 
 ##  Add color to |ls| output on OSX.
 export CLICOLOR=1
-##  |ls| is one column by default, as in powershell.
-alias ls='ls -l --color'
 ##  Don't create |.pyc| files while executing python code from console.
 export PYTHONDONTWRITEBYTECODE=1
 ##* Usefull for npm tools that are not installed globally
@@ -42,20 +40,32 @@ if test "$(uname)" == "Darwin"; then
   export LC_ALL=en_US.UTF-8
   ##  |PYTHONDONTWRITEBYTECODE| don't work on OSX 10.8, default python is
   ##  64-bit that is not compatible with wxWidgets.
-  alias python="arch -i386 /usr/bin/python2.7 -B"
+  # alias python="arch -i386 /usr/bin/python2.7 -B"
+
+  ##  |ls| is one column by default, as in powershell.
+  alias ls='ls -l'
+
 else
   ##  Remap caps lock to backspace.
   # gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace']"
 
   ##FIXME: Seems not persisting on Ubuntu, need to check why.
   # setterm -background black -foreground white
+
+  ##  |ls| is one column by default, as in powershell.
+  alias ls='ls -l --color'
+
   true
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
+export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+##  Alongside |.pydistutils.cfg| allows to call |easy_install| and |pip|
+##  without |sudo|.
+export PYTHONPATH=~/.local/python-site-packages
+##  |easy_install| adds binry files there.
+export PATH=$PATH:~/.local/bin
 ##  git aliases
 alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias gs='git status'
