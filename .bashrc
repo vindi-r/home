@@ -55,6 +55,11 @@ else
   ##  |ls| is one column by default, as in powershell.
   alias ls='ls -l --color'
 
+  ##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
+  ##  Disable disk cache so multiple chrome instances will not kill HDD.
+  CHROME_BIN=/opt/google/chrome/chrome
+  alias chrome='GTK_IM_MODULE="" $CHROME_BIN --disk-cache-size=10000000'
+
   true
 fi
 
@@ -83,11 +88,6 @@ alias gu='git pull'
 ## cd aliases (for consistency with win that don't have ~).
 alias cdh='cd ~'
 alias cdd='cd ~/Documents'
-
-##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
-##  Disable disk cache so multiple chrome instances will not kill HDD.
-CHROME_BIN=/opt/google/chrome/chrome
-alias chrome='GTK_IM_MODULE="" $CHROME_BIN --disk-cache-size=10000000'
 
 venv() {
   if ! test -d ./.env; then
