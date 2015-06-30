@@ -295,7 +295,7 @@ let NERDTreeChDirMode = 2
 ""* No 'press ? for help' and 'Bookmarks' labels.
 let NERDTreeMinimalUI=1
 ""* width
-let NERDTreeWinSize=26
+let NERDTreeWinSize=32
 ""  Don't show some files in 'Documents', '~' on win. Defined by regexp.
 let NERDTreeIgnore = [
   \ 'Diablo III',
