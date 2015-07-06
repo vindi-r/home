@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # coding:utf-8 vi:et:ts=2
 
-##  Add color to |ls| output on OSX.
-export CLICOLOR=1
 ##  Don't create |.pyc| files while executing python code from console.
 export PYTHONDONTWRITEBYTECODE=1
 ##* Usefull for npm tools that are not installed globally
@@ -30,6 +28,10 @@ unset SSH_ASKPASS
 
 ##  OSX?
 if test "$(uname)" == "Darwin"; then
+  ##  Add color to |ls| output
+  export CLICOLOR=1
+  ##  Better 'ls' output colors.
+  export LSCOLORS=Exfxcxdxbxegedabagacad
   ##  Colors are {R,G,B}, 0-65535
   osascript -e "tell front window of app \"Terminal\" to set background color to {12288,2560,9216}"
   osascript -e "tell front window of app \"Terminal\" to set normal text color to {50000,50000,50000}"
