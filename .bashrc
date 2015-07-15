@@ -93,6 +93,11 @@ alias cdd='cd ~/Documents'
 
 venv() {
   if ! test -d ./.env; then
+    mkdir ./.env
+    ##! If exists, "~/.pydistutils.cfg" will be ignored. And it must be
+    ##  ignored since it may contain "install_lib" or "install_scripts"
+    ##  that will override virtualenv dirs as install targets.
+    touch ./.env/.pydistutils.cfg
     virtualenv --no-site-packages ./.env;
   fi
   source ./.env/bin/activate
