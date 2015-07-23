@@ -8,6 +8,6 @@ cd ~
 . ~/.bashrc
 ##! Required by easy_install
 mkdir -p ~/.local/python-site-packages/
-##  Works without dudo due to ~/.pydistutils.cfg and PYTHONPATH
+##  Works without sudo due to ~/.pydistutils.cfg and PYTHONPATH
 easy_install pip
 
