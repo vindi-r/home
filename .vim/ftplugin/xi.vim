@@ -1,10 +1,10 @@
 " XI handling code.
 " (c) Grigory Petrov, 2009
 
-if exists("b:isXiLoaded")
+if exists("g:isXiLoaded")
   finish
 endif
-let b:isXiLoaded = 1
+let g:isXiLoaded = 1
 
 
 fu! XiIsLink(i_sName)

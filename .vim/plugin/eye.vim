@@ -1,5 +1,9 @@
 ""  My personal tools.
 
+if exists("g:isEyePluginLoaded")
+  finish
+endif
+let g:isEyePluginLoaded = 1
 
 ""  Current search result in \a (ag) command, -1 is 'none', first is 1.
 let g:curErr = -1
