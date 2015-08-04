@@ -2,7 +2,7 @@
 
 
 ""  Current search result in \a (ag) command, -1 is 'none', first is 1.
-let g:nErrCur = -1
+let g:curErr = -1
 
 
 ""x Evaluates to safe 'root directory' that is either home or
@@ -10,8 +10,8 @@ let g:nErrCur = -1
 fu! EyeGetRootDir()
   for i in range( bufnr( '$' ) )
     if bufname( i ) =~ 'NERD_tree_' && bufwinnr( i ) != -1
-      let l:mRoot = getbufvar( i, 'NERDTreeRoot' )
-      return l:mRoot.path.str()
+      let l:root = getbufvar( i, 'NERDTreeRoot' )
+      return l:root.path.str()
     endif
   endfor
   return expand( '~/Documents' )
@@ -21,14 +21,14 @@ endf
 ""x Opens new buffer with same working dir as current one.
 fu! EyeBufNew()
   call <SID>focusNonsysWnd()
-  let l:sCwd = getcwd()
+  let l:cwd = getcwd()
   :enew
-  exec "cd " . l:sCwd
+  exec "cd " . l:cwd
 endf
 
 
-fu! s:isBufSys( n_id )
-  let l:name = bufname( a:n_id )
+fu! s:isBufSys( bufId )
+  let l:name = bufname( a:bufId )
   if l:name == '-MiniBufExplorer-'
     return 1
   endif
@@ -36,30 +36,30 @@ fu! s:isBufSys( n_id )
     return 1
   endif
   ""  Quickfix window?
-  if getbufvar( a:n_id, '&filetype' ) == 'qf'
+  if getbufvar( a:bufId, '&filetype' ) == 'qf'
     return 1
   endif
   return 0
 endf
 
 
-fu! s:msg( s_txt, ... )
+fu! s:msg( txt, ... )
   if a:0 > 0
     if a:1 == 'warn'
       echohl warningmsg
     endif
   endif
-  echo strftime( "[%H:%M:%S] " ) . a:s_txt
+  echo strftime( "[%H:%M:%S] " ) . a:txt
   echohl normal
 endf
 
 
-fu! s:indent( s_txt )
-  let l:nIndent = 0
-  while ' ' == a:s_txt[ l:nIndent ]
-    let l:nIndent += 1
+fu! s:indent( txt )
+  let l:indent = 0
+  while ' ' == a:txt[ l:indent ]
+    let l:indent += 1
   endwhile
-  return l:nIndent
+  return l:indent
 endf
 
 
@@ -152,43 +152,43 @@ endf
 ""  synchronizing NERDTree, if any. |project| is something under version
 ""  control (svn, hg or git) and |root| is VCS root.
 fu! EyeCd( ... )
-  let l:sPath = ''
+  let l:path = ''
   if a:0 > 0
-    let l:sPath = a:1
+    let l:path = a:1
     ""  Use '.' to denote 'current file path'.
-    if l:sPath == '.'
-      let l:sPath = expand( '%:p:h' )
-      if l:sPath =~ "[\\/]kb$"
+    if l:path == '.'
+      let l:path = expand( '%:p:h' )
+      if l:path =~ "[\\/]kb$"
         return <SID>msg( "will not cd into wiki, too huge", 'warn' )
       endif
     endif
   else
-    let l:sCurPath = expand( '%:p' )
-    if l:sCurPath == ''
+    let l:curPath = expand( '%:p' )
+    if l:curPath == ''
       return <SID>msg( "current buffer not showing a file", 'warn' )
     endif
     if has( "win32" )
-      let l:lPath = split( substitute( l:sCurPath, "/", "\\", "g" ), "\\" )
+      let l:pathParts = split( substitute( l:curPath, "/", "\\", "g" ), "\\" )
     else
-      let l:lPath = split( l:sCurPath, "/" )
+      let l:pathParts = split( l:curPath, "/" )
     endif
-    for i in range( len( l:lPath ) - 2, 0, - 1 )
-      if len( l:lPath[ i ] )
-        let l:sRoot = join( l:lPath[ 0 : i ], '/' )
+    for i in range( len( l:pathParts ) - 2, 0, - 1 )
+      if len( l:pathParts[ i ] )
+        let l:root = join( l:pathParts[ 0 : i ], '/' )
       else
-        let l:sRoot = '/'
+        let l:root = '/'
       endif
-      if l:sRoot =~ ":$"
-        let l:sRoot = l:sRoot . "\\"
+      if l:root =~ ":$"
+        let l:root = l:root . "\\"
       endif
-      let l:sNonhidden = l:sRoot . "/*"
-      let l:sHidden = l:sRoot . "/.[^.]*"
-      let l:sList = glob( l:sNonhidden ) . "\n" . glob( l:sHidden )
-      for sDir in split( l:sList, "\n" )
-        if isdirectory( sDir )
-          let l:sFilter = 'v:val == "' . fnamemodify( sDir, ':t' ) . '"'
-          if len( filter( [ '.svn', '.hg', '.git' ], l:sFilter ) )
-            let l:sPath = l:sRoot
+      let l:globForHidden = l:root . "/*"
+      let l:globForVisible = l:root . "/.[^.]*"
+      let l:dirs = glob( l:globForHidden ) . "\n" . glob( l:globForVisible )
+      for dirPath in split( l:dirs, "\n" )
+        if isdirectory( dirPath )
+          let l:filter = 'v:val == "' . fnamemodify( dirPath, ':t' ) . '"'
+          if len( filter( [ '.svn', '.hg', '.git' ], l:filter ) )
+            let l:path = l:root
             break
           endif
         endif
@@ -196,29 +196,29 @@ fu! EyeCd( ... )
     endfor
   endif
 
-  if l:sPath == ''
+  if l:path == ''
     return <SID>msg( "repository root not found", 'warn' )
   endif
 
-  exec 'cd ' . l:sPath
+  exec 'cd ' . l:path
   NERDTreeCWD
   normal gg
   ""* Restore current window since current window changed to
   ""  NERDTree.
   wincmd W
   redraw
-  return <SID>msg( "CWD is " . l:sPath )
+  return <SID>msg( "CWD is " . l:path )
 endf
 
 
-fu! EyeOpenFile( s_file )
+fu! EyeOpenFile( fileName )
   call <SID>focusNonsysWnd()
-  let l:sFilePath = fnamemodify( a:s_file, ":p" )
+  let l:filePath = fnamemodify( a:fileName, ":p" )
   ""  Remember current buffer number.
   let l:bufNr = bufnr( '%' )
   ""  Open file in new buffer. This also adds current buffer to jumplist
   ""  So user can jump back with |C-O|.
-  exec "e " . l:sFilePath
+  exec "e " . l:filePath
   ""! If previous buffer was new empty buffer - it's auto deleted after
   ""  opening new file.
   if buflisted( l:bufNr ) && bufnr( '%' ) != l:bufNr
@@ -253,16 +253,16 @@ fu! EyeXiNew()
 endf
 
 
-let g:nEyeNerdTreeVisible=0
+let g:isEyeNerdTreeVisible=0
 fu! EyeTreeToggle()
   if exists( ':NERDTree' )
-    if g:nEyeNerdTreeVisible
-      let g:nEyeNerdTreeVisible = 0
+    if g:isEyeNerdTreeVisible
+      let g:isEyeNerdTreeVisible = 0
       NERDTreeClose
       ""  NERDTree not visible - decrease window width by NERDTree width.
       exec 'set columns-=' . g:NERDTreeWinSize
     else
-      let g:nEyeNerdTreeVisible = 1
+      let g:isEyeNerdTreeVisible = 1
       NERDTree
       wincmd W
       ""  Increase window width by NERDTree width.
@@ -326,49 +326,49 @@ endf
 
 
 fu! EyeErrNext()
-  let l:nCount = len( getqflist() )
-  if 0 == l:nCount
+  let l:errCount = len( getqflist() )
+  if 0 == l:errCount
     return <SID>msg( "error list is empty", 'warn' )
   endif
-  if g:nErrCur >= l:nCount
+  if g:curErr >= l:errCount
     return <SID>msg( "current result is last", 'warn' )
   endif
-  if -1 == g:nErrCur
-    let g:nErrCur = 1
+  if -1 == g:curErr
+    let g:curErr = 1
   else
-    let g:nErrCur = g:nErrCur + 1
+    let g:curErr = g:curErr + 1
   endif
-  call EyeBufClose( ':cc ' . g:nErrCur )
+  call EyeBufClose( ':cc ' . g:curErr )
   normal! zz
   redraw
-  call <SID>msg( g:nErrCur . ' / ' . l:nCount )
+  call <SID>msg( g:curErr . ' / ' . l:errCount )
 endf
 
 
 fu! EyeErrPrev()
-  let l:nCount = len( getqflist() )
-  if 0 == l:nCount
+  let l:errCount = len( getqflist() )
+  if 0 == l:errCount
     return <SID>msg( "error list is empty", 'warn' )
   endif
-  if -1 == g:nErrCur
+  if -1 == g:curErr
     return <SID>msg( "current result is before first", 'warn' )
   endif
-  if 1 == g:nErrCur
+  if 1 == g:curErr
     return <SID>msg( "current result is first", 'warn' )
   endif
-  let g:nErrCur = g:nErrCur - 1
-  call EyeBufClose( ':cc ' . g:nErrCur )
+  let g:curErr = g:curErr - 1
+  call EyeBufClose( ':cc ' . g:curErr )
   normal! zz
   redraw
-  call <SID>msg( g:nErrCur . ' / ' . l:nCount )
+  call <SID>msg( g:curErr . ' / ' . l:errCount )
 endf
 
 
 fu! EyeAg( args )
-  let g:nErrCur = -1
+  let g:curErr = -1
 
-  let l:sGrepProg = &grepprg
-  let l:sGrepFormat = &grepformat
+  let l:grepProg = &grepprg
+  let l:grepFormat = &grepformat
   try
     let &grepprg = 'ag'
     let &grepformat = '%f:%l:%c:%m'
@@ -382,75 +382,75 @@ fu! EyeAg( args )
     let l:options = '--nocolor --nogroup --column --ignore-case'
     silent execute 'grep! ' . l:options . ' ' . a:args
   finally
-    let &grepprg = l:sGrepProg
-    let &grepformat = l:sGrepFormat
+    let &grepprg = l:grepProg
+    let &grepformat = l:grepFormat
   endtry
 
-  let l:nCount = len( getqflist() )
+  let l:errCount = len( getqflist() )
   redraw
-  call <SID>msg( "found " . l:nCount . " items" )
+  call <SID>msg( "found " . l:errCount . " items" )
 endf
 
 
 fu! EyeCompleteJs( findstart, base )
   ""  Request for word to complete to the left of cursor?
   if a:findstart
-    let l:sLine = getline( '.' )
-    let l:nCol = col( '.' ) - 1
-    while l:nCol > 0 && l:sLine[ l:nCol - 1 ] !~ '\s'
-      let l:nCol -= 1
+    let l:curLine = getline( '.' )
+    let l:curCol = col( '.' ) - 1
+    while l:curCol > 0 && l:curLine[ l:curCol - 1 ] !~ '\s'
+      let l:curCol -= 1
     endwhile
-    return l:nCol
+    return l:curCol
   ""  Request for completion list?
   else
     if 'this.' == a:base
 
-      let l:nRow = line( '.' )
+      let l:curRow = line( '.' )
       ""  Search for nearest non-commented function definition.
-      while l:nRow > 0
-        let l:sLine = getline( l:nRow )
-        if l:sLine =~ '\(\A\|^\)function\(\A\|$\)'
-          if l:sLine !~ '^\s*//'
+      while l:curRow > 0
+        let l:curLine = getline( l:curRow )
+        if l:curLine =~ '\(\A\|^\)function\(\A\|$\)'
+          if l:curLine !~ '^\s*//'
             break
           endif
         endif
-        let l:nRow -= 1
+        let l:curRow -= 1
       endwhile
 
-      if 0 == l:nRow
+      if 0 == l:curRow
         call <SID>msg( "Function definition not found." )
         return []
       endif
 
       ""  Detect how function is defined: via 'this.name=' or 'name:'.
-      let l:sLine = getline( l:nRow )
-      if l:sLine =~ '\s*this\.\w\+\s*=\s*function'
-        let l:sPattern = '\s*this\.\(\w\+\)\s*='
-      elseif l:sLine =~ '\s*\w\+\s*:\s*function'
-        let l:sPattern = '\s*\(\w\+\)\s*:'
+      let l:curLine = getline( l:curRow )
+      if l:curLine =~ '\s*this\.\w\+\s*=\s*function'
+        let l:pattern = '\s*this\.\(\w\+\)\s*='
+      elseif l:curLine =~ '\s*\w\+\s*:\s*function'
+        let l:pattern = '\s*\(\w\+\)\s*:'
       else
-        call <SID>msg( "Unknown function definition at " . l:nRow )
+        call <SID>msg( "Unknown function definition at " . l:curRow )
         return []
       endif
-      let l:nBaseIndent = <SID>indent( l:sLine )
+      let l:baseIndent = <SID>indent( l:curLine )
 
       ""  Collect class fields.
-      let l:lFields = []
-      while l:nRow > 0
-        let l:sLine = getline( l:nRow )
-        let l:nIndent = <SID>indent( l:sLine )
-        if l:nIndent < l:nBaseIndent && len( l:sLine ) > l:nIndent
+      let l:fields = []
+      while l:curRow > 0
+        let l:curLine = getline( l:curRow )
+        let l:indent = <SID>indent( l:curLine )
+        if l:indent < l:baseIndent && len( l:curLine ) > l:indent
           break
         endif
-        let l:lMatch = matchlist( l:sLine, l:sPattern )
-        if len( l:lMatch ) > 0
-          call add( l:lFields, "this." . l:lMatch[ 1 ] )
+        let l:matchParts = matchlist( l:curLine, l:pattern )
+        if len( l:matchParts ) > 0
+          call add( l:fields, "this." . l:matchParts[ 1 ] )
         endif
-        let l:nRow -= 1
+        let l:curRow -= 1
       endwhile
 
-      if len( l:lFields ) > 0
-        return [ 'this.' ] + reverse( l:lFields )
+      if len( l:fields ) > 0
+        return [ 'this.' ] + reverse( l:fields )
       endif
     else
     return []
