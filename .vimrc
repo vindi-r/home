@@ -570,12 +570,12 @@ else
   if v:version >= 703
     ""  Number of lines for macbook 12 2005
     set lines=39
-    if has( "mac" )
+    if has("mac")
       ""  Number of columns for macbook 12 2005
-      columns=88
+      set columns=88
     else
       ""  Version 7.3+ has right margin, so set with do ~half of 1280 pixels.
-      columns=86
+      set columns=86
     endif
   else
     set lines=39 columns=78
