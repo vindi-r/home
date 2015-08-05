@@ -321,6 +321,11 @@ let NERDTreeIgnore = [
   \ '.\+\.egg-info',
   \ '_viminfo'
 \ ]
+""  Supress message spam
+fu! Nilfunc(...)
+endfu
+""! Don't know how to patch autoload function.
+""  let nerdtree#echo = function('Nilfunc')
 
 ""  Display tags in a window.
 ""! Temporary disable since it calls 'ctags' on each buffer switch which
@@ -379,6 +384,8 @@ filetype plugin on
 
 command XI :call EyeXiOpen()
 command XINEW :call EyeXiNew()
+""  Disable 'ex mode'
+:map Q <Nop>
 ""! Normal use case while browsing source code files is to open them from
 ""  NERDTree, view, close and go back to NERDTree. If no more files are
 ""  open auto go to NERDTree to reduce manual movement.
