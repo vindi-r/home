@@ -321,11 +321,6 @@ let NERDTreeIgnore = [
   \ '.\+\.egg-info',
   \ '_viminfo'
 \ ]
-""  Supress message spam
-fu! Nilfunc(...)
-endfu
-""! Don't know how to patch autoload function.
-""  let nerdtree#echo = function('Nilfunc')
 
 ""  Display tags in a window.
 ""! Temporary disable since it calls 'ctags' on each buffer switch which
@@ -379,6 +374,12 @@ Plugin 'hail2u/vim-css3-syntax'
 
 call vundle#end()
 filetype plugin on
+
+""! Patch plugin function AFTER plugins are loaded.
+
+""  Supress message spam
+fun! nerdtree#echo(...)
+endfun
 
 ""@ Commands.
 
