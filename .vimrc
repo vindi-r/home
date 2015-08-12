@@ -431,8 +431,8 @@ vnoremap <leader>y "+y
 vnoremap <leader>d "+d
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap <leader>o :echo jump previous<cr>
-nnoremap <leader>i :echo jump next<cr>
+nnoremap <leader>o :call XiJumpBack()<cr>
+nnoremap <leader>i :echo "not implemented"<cr>
 
 ""  Emacs-style editing on the command-line: >
 " start of line

@@ -6,8 +6,12 @@ if exists("g:isXiLoaded")
 endif
 let g:isXiLoaded = 1
 
+""  Own jumplist, since vim's jumplist is too easily overriden or
+""  bloated with irrelevant jumps.
+let g:xiJumplist = []
 
-fu! XiIsLink(i_sName)
+
+fun! XiIsLink(i_sName)
   if a:i_sName == "hi_xi_link"
     return 1
   endif
@@ -30,10 +34,10 @@ fu! XiIsLink(i_sName)
     return 1
   end
   return 0
-endfunc
+endfun
 
 
-fu! XiGoLink()
+fun! XiGoLink()
   let s:nLine = line(".")
   let s:nPos = col(".")
   let s:nId = synID(s:nLine, s:nPos, 0)
@@ -83,18 +87,21 @@ fu! XiGoLink()
   let s:sFileName = tolower(s:sFile) . ".xi"
   let s:sFilePath = expand("%:p:h") . '/' . s:sFileName
 
-  ""  Create file if it does not exists.
   ""! Not a very good idea since wrong spelled wikilinks will create
   ""  empty files
-  if ! filereadable(s:sFilePath)
-    call writefile([""], s:sFilePath)
+  if 0
+    ""  Create file if it does not exists.
+    if ! filereadable(s:sFilePath)
+      call writefile([""], s:sFilePath)
+    endif
   endif
 
   ""  Remember current buffer number.
   let s:nBuf = bufnr('%')
+  ""  Add current buffer file path to jumplist
+  let g:xiJumplist = add(g:xiJumplist, expand('%:p'))
 
-  ""  Open file in new buffer. This also adds current buffer to jumplist
-  ""  So user can jump back with |C-O|.
+  ""  Open file in new buffer.
   exec "e " . s:sFilePath
 
   ""! If previous buffer was new empty buffer - it's auto deleted after
@@ -113,7 +120,22 @@ fu! XiGoLink()
     silent! exec "normal /" . l:sPar . "\\(\\[\\]\\)\\? \\.\<CR>"
   endif
 
-endfunc
+endfun
+
+fun! XiJumpBack()
+  if len(g:xiJumplist) == 0
+    echo "jumplist empty"
+    return
+  endif
+  let s:last = g:xiJumplist[-1]
+  unlet g:xiJumplist[-1]
+  let s:curBuf = bufnr('%')
+  exec "e " . s:last
+  ""  Close previous buffer, if any.
+  if buflisted(s:curBuf) && bufnr('%') != s:curBuf
+    exec "bd " . s:curBuf
+  endif
+endfun
 
 map <silent> <C-]> :call XiGoLink()<CR>
 map <silent> <leftrelease> <Esc> :call XiGoLink()<CR>
