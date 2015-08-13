@@ -313,4 +313,6 @@ tmp/
 .tsd-cache/
 .sudo_as_admin_successful
 .wine/
+.docker/
+.ivy2/
 
