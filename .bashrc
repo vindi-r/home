@@ -72,6 +72,7 @@ export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PYTHONPATH=~/.local/python-site-packages
 ##  |easy_install| adds binry files there.
 export PATH=$PATH:~/.local/bin
+
 ##  git aliases
 alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias gs='git status'
@@ -85,6 +86,12 @@ alias gm='git mv'
 alias gp='git push'
 ##  'git up'
 alias gu='git pull'
+
+##  svn aliases
+alias svl='svn log'
+alias svs='svn stat'
+alias svd='svn diff --diff-cmd colordiff | less -R'
+alias svc='svn commit -m'
 
 ## cd aliases (for consistency with win that don't have ~).
 alias cdh='cd ~'
