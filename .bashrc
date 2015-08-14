@@ -90,7 +90,7 @@ alias gu='git pull'
 ##  svn aliases
 alias svl='svn log'
 alias svs='svn stat'
-alias svd='svn diff --diff-cmd colordiff | less -R'
+alias svd='svn diff --diff-cmd colordiff -w | less -R'
 alias svc='svn commit -m'
 
 ## cd aliases (for consistency with win that don't have ~).
