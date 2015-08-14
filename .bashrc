@@ -41,6 +41,11 @@ if test "$(uname)" == "Darwin"; then
   ##  |ls| is one column by default, as in powershell.
   alias ls='ls -l'
 
+  ##  custom svn installed?
+  if test -e /opt/subversion/bin; then
+    export PATH=/opt/subversion/bin:$PATH
+  fi
+
 else
   ##  Remap caps lock to backspace.
   # gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace']"
