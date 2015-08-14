@@ -32,12 +32,6 @@ if test "$(uname)" == "Darwin"; then
   export CLICOLOR=1
   ##  Better 'ls' output colors.
   export LSCOLORS=Exfxcxdxbxegedabagacad
-  ##  Colors are {R,G,B}, 0-65535
-  osascript -e "tell front window of app \"Terminal\" to set background color to {12288,2560,9216}"
-  osascript -e "tell front window of app \"Terminal\" to set normal text color to {50000,50000,50000}"
-  osascript -e "tell front window of app \"Terminal\" to set bold text color to {50000,50000,50000}"
-  ##  Executable: 138, 226, 51
-  ##  Dir: 114, 159, 207
   ##  For django 'syncdb' command to work.
   export LC_ALL=en_US.UTF-8
   ##  |PYTHONDONTWRITEBYTECODE| don't work on OSX 10.8, default python is
