@@ -33,6 +33,12 @@ fun! XiIsLink(i_sName)
   if a:i_sName == "hi_xi_h4_link"
     return 1
   end
+  if a:i_sName == "hi_xi_h5_link"
+    return 1
+  end
+  if a:i_sName == "hi_xi_h6_link"
+    return 1
+  end
   return 0
 endfun
 
