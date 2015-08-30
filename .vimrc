@@ -234,6 +234,12 @@ let g:miniBufExplModSelTarget = 1
 ""  is not very good implemented.
 ""  Plugin 'vim-scripts/Conque-GDB'
 
+"" :ColorSel color selector
+Plugin 'vim-scripts/colorsel.vim'
+
+"" Highlight colors like '#fff' or '#ffffff'
+Plugin 'vim-scripts/hexHighlight.vim'
+
 ""  Surround specified text with quotes, tags etc.
 Plugin 'tpope/vim-surround'
 

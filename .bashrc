@@ -46,6 +46,8 @@ if test "$(uname)" == "Darwin"; then
     export PATH=/opt/subversion/bin:$PATH
   fi
 
+  export PS1='\[\e[37m\]\W\[\e[32m\]$(~/git-radar/git-radar --bash --fetch)\[\e[33m\] \$ \[\e[37m\]'
+
 else
   ##  Remap caps lock to backspace.
   # gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace']"
@@ -108,12 +110,4 @@ venv() {
   fi
   source ./.env/bin/activate
 }
-
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWSTASHSTATE=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWCOLORHINTS=true
-source ~/.git-prompt.sh
-
-export PS1='\[\e[37m\]\W\[\e[32m\]$(__git_ps1 " [%s]")\[\e[33m\] \$ \[\e[37m\]'
 

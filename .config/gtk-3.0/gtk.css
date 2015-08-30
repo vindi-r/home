@@ -1,3 +1,11 @@
+.titlebar {
+  background: #4a90d9;
+}
+
+.titlebar:backdrop {
+  background: #f9f9f9;
+}
+
 TerminalWindow .notebook tab:active {
   background-color: #def;
 }
