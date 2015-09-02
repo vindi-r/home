@@ -46,6 +46,15 @@ if test "$(uname)" == "Darwin"; then
     export PATH=/opt/subversion/bin:$PATH
   fi
 
+  ##  custom mongo installed?
+  MONGOAPP=~/Applications/MongoDB.app
+  MONGOBINDIR=$MONGOAPP/Contents/Resources/Vendor/mongodb
+  if test -e $MONGOBINDIR/mongo; then
+    alias mongo=$MONGOBINDIR/mongo
+    alias mongodump=$MONGOBINDIR/mongodump
+    alias mongorestore=$MONGOBINDIR/mongorestore
+  fi
+
   export PS1='\[\e[37m\]\W\[\e[32m\]$(~/git-radar/git-radar --bash --fetch)\[\e[33m\] \$ \[\e[37m\]'
 
 else
