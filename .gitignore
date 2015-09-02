@@ -315,4 +315,10 @@ tmp/
 .wine/
 .docker/
 .ivy2/
+.cups/
+.dbshell
+.mongorc.js
+.ngrok2/
+.oracle_jre_usage/
+.git-radar/
 
