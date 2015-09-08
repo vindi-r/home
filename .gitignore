@@ -321,4 +321,5 @@ tmp/
 .ngrok2/
 .oracle_jre_usage/
 .git-radar/
+.parse/
 

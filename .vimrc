@@ -401,6 +401,7 @@ command ENEW :call EyeBufNew()
 command -nargs=? -complete=file CD :call EyeCd( <f-args> )
 command -nargs=? -complete=file CDH :call EyeCd('~')
 command -nargs=? -complete=file CDD :call EyeCd('~\Documents')
+command -nargs=? -complete=file CDSP :call EyeCd('~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins')
 command -nargs=1 -complete=file E :call EyeOpenFile( <f-args> )
 command VS :call EyeVerticalSplit()
 nnoremap <silent> <C-o> :call EyeJumpPrev()<cr>

@@ -107,6 +107,7 @@ alias svc='svn commit -m'
 ## cd aliases (for consistency with win that don't have ~).
 alias cdh='cd ~'
 alias cdd='cd ~/Documents'
+alias cdsp='cd ~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins'
 
 venv() {
   if ! test -d ./.env; then
