@@ -322,4 +322,5 @@ tmp/
 .oracle_jre_usage/
 .git-radar/
 .parse/
+.babel.json
 
