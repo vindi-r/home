@@ -55,6 +55,10 @@ if test "$(uname)" == "Darwin"; then
     alias mongorestore=$MONGOBINDIR/mongorestore
   fi
 
+  export JAVA_HOME=$(/usr/libexec/java_home)
+  ##  brew install android-sdk
+  export ANDROID_HOME=/usr/local/opt/android-sdk
+
   export PS1='\[\e[37m\]\W\[\e[32m\]$(~/.git-radar/git-radar --bash --fetch)\[\e[33m\] \$ \[\e[37m\]'
 
 else

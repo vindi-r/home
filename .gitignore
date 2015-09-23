@@ -324,4 +324,5 @@ tmp/
 .git-radar/
 .parse/
 .babel.json
+.gradle/
 
