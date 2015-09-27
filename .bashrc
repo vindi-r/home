@@ -46,6 +46,11 @@ if test "$(uname)" == "Darwin"; then
     export PATH=/opt/subversion/bin:$PATH
   fi
 
+  ## homebrew tools installed?
+  if test -e /usr/local/sbin; then
+    export PATH=/usr/local/sbin:$PATH
+  fi
+
   ##  custom mongo installed?
   MONGOAPP=~/Applications/MongoDB.app
   MONGOBINDIR=$MONGOAPP/Contents/Resources/Vendor/mongodb
