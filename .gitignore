@@ -325,4 +325,5 @@ tmp/
 .parse/
 .babel.json
 .gradle/
+.node_repl_history
 
