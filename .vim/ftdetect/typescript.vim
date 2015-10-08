@@ -1,3 +1,3 @@
-au BufRead,BufNewFile *.ts set filetype=typescript
+au BufRead,BufNewFile *.ts,*.tsx set filetype=typescript
 filetype plugin on
 
