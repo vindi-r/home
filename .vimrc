@@ -378,6 +378,9 @@ Plugin 'editorconfig/editorconfig-vim'
 ""  Better CSS syntax highlighting.
 Plugin 'hail2u/vim-css3-syntax'
 
+""  xterm-256 color table
+Plugin 'guns/xterm-color-table.vim'
+
 call vundle#end()
 filetype plugin on
 
