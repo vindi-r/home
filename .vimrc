@@ -428,6 +428,8 @@ nnoremap <leader>ef :call EyeTreeFind()<cr>
 nnoremap <leader>eb :Bookmark<cr>
 nnoremap <leader>[ :call EyeErrPrev()<cr>
 nnoremap <leader>] :call EyeErrNext()<cr>
+nnoremap <leader>n :cn<cr>
+nnoremap <leader>p :cp<cr>
 nnoremap <leader>xv :call EyeExecViml()<cr>
 nnoremap <leader>a :Ack<space>
 nnoremap <leader>fj :call EyeFontInc()<cr>

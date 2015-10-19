@@ -141,7 +141,7 @@ hi! link StatusLineNC hi_gui_inactive
 " Highlighted cursor line.
 hi! link CursorLine hi_bg_cur
 " BUG: if 'hi link' is used, status line is updated incorrectly.
-" If defined manually, guifg and guibg are switched
+" If defined manually, guifg and guibg are *switched*.
 " au InsertEnter * hi! link StatusLine hi_gui_warn
 " au InsertLeave * hi! link StatusLine hi_gui
 au InsertEnter * hi! statusline guifg=#CC0000 guibg=#000000
