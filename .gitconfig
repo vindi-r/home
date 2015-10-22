@@ -12,3 +12,10 @@
 [color "diff"]
   meta = black bold
 
+[diff]
+	tool = delta
+[difftool]
+	prompt = false
+[difftool "delta"]
+	cmd = delta \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+

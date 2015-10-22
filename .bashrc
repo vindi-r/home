@@ -104,6 +104,7 @@ alias ga='git add -N'
 alias gb='git branch'
 alias gc='git commit -am'
 alias gd='git diff --ignore-space-change'
+alias gd='git difftool --ignore-space-change'
 ##  Avoid conflict with 'go' programming language.
 alias gg='git checkout'
 alias gm='git mv'
