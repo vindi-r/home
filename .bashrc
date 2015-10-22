@@ -26,6 +26,10 @@ fi
 ##  gnome-ssh-askpass don't work.
 unset SSH_ASKPASS
 
+##  Required for 'go' to function
+export GOPATH=~/go
+export PATH=$GOPATH/bin:$PATH
+
 ##  OSX?
 if test "$(uname)" == "Darwin"; then
   ##  Add color to |ls| output

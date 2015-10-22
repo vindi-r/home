@@ -327,4 +327,7 @@ tmp/
 .gradle/
 .node_repl_history
 .bash_sessions/
+go/
+.bash_profile.backup
+google-cloud-sdk/
 
