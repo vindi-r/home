@@ -11,6 +11,10 @@ endif
 ""  No compatibility with VI.
 ""! Can't be set at runtime, must be in vimrc file.
 set nocompatible
+""! Patched vim with true color support
+let &t_8f="\e[38;2;%ld;%ld;%ldm"
+let &t_8b="\e[48;2;%ld;%ld;%ldm"
+set guicolors
 ""  Disable beeps.
 set vb
 ""  Scan first 5 and last 5 lines of any opened file for vim settings.
