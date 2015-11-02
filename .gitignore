@@ -330,4 +330,6 @@ tmp/
 go/
 .bash_profile.backup
 google-cloud-sdk/
+# swift repl creates this on osx
+.lldb/
 
