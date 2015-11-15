@@ -357,6 +357,9 @@ Plugin 'kien/ctrlp.vim'
 ""  Markdown syntax highlighting.
 Plugin 'tpope/vim-markdown'
 
+""  Swift syntax highlighting.
+Plugin 'keith/swift.vim'
+
 ""  Bookmarks list
 Plugin 'MattesGroeger/vim-bookmarks'
 ""! Default mapping starts with 'm' which conflicts with NERDTree menu.
