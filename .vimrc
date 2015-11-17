@@ -297,6 +297,7 @@ let g:syntastic_mode_map = {'mode': 'passive'}
 Plugin 'derekwyatt/vim-fswitch'
 
 ""  File explorer.
+""  Bookmarks managed via :Bookmark, :ClearBookmarks
 Plugin 'scrooloose/nerdtree'
 ""  Show arrows instead of '+' and bars.
 let NERDTreeDirArrows = 1
