@@ -216,8 +216,10 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 ""! Required for snipmate.
 Plugin 'vim-scripts/tlib'
 
-""! Required for syntastic.
-Plugin 'pydave/AsyncCommand'
+if has("clientserver")
+  ""! Required for syntastic.
+  Plugin 'pydave/AsyncCommand'
+endif
 
 ""! Required for patched autocomplpopup
 Plugin 'git-mirror/vim-l9'

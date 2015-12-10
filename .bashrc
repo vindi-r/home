@@ -9,6 +9,8 @@ export PATH=$PATH:./node_modules/.bin
 export GIT_SSL_NO_VERIFY=true
 ##  256-colors in terminal for apps that knows how to use it.
 export TERM=xterm-256color
+##  Used by apps to launch text editor.
+export EDITOR=vim
 ##  Required for VIM, otherwise it will start creating dirs names '$TMP'.
 if test -z $TMP; then
   export TMP=~/tmp
