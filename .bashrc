@@ -101,7 +101,7 @@ export PATH=$PATH:~/.local/bin
 
 ##  git aliases
 alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
-alias gs='git status'
+alias gs='git status -s'
 alias ga='git add -N'
 alias gb='git branch'
 alias gc='git commit -am'
@@ -113,7 +113,7 @@ alias gm='git mv'
 ##  'git push'
 alias gp='git push'
 ##  'git up'
-alias gu='git pull'
+alias gu='git pull --all'
 
 ##  svn aliases
 alias svl='svn log'
