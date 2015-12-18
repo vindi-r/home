@@ -13,6 +13,6 @@ syn keyword Statement this var new function typeof true false prototype
   \ class module interface void any declare number string console NaN let
   \ constructor from as of async await
 hi link javaScriptNumber Number
-syn region  javaScriptStringT start=+`+ skip=+\\\\\|\\`+ end=+`\|$+ contains=javaScriptSpecial,@htmlPreproc
+syn region javaScriptStringT start=+`+ skip=+\\\\\|\\`+ end=+`\|$+ contains=javaScriptSpecial,@htmlPreproc
 hi link javaScriptStringT String
 

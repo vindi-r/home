@@ -10,5 +10,7 @@ syn keyword Statement this var new function typeof true false prototype
   \ console NaN from as of
 syn keyword hi_txt package
 hi link javaScriptNumber Number
+syn region javaScriptStringT start=+`+ skip=+\\\\\|\\`+ end=+`\|$+ contains=javaScriptSpecial,@htmlPreproc
+hi link javaScriptStringT String
 set completefunc=EyeCompleteJs
 
