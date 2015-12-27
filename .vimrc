@@ -413,6 +413,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <C-Q> <C-W>q
 ""  Disable closing all windows - NERDTree and minibufexplorer are intended
 ""  to be always opened.
 map <C-W><C-O> <C-W><C-_>
