@@ -100,22 +100,22 @@ syn region hi_xi_code matchgroup=hi_fg_hide start='|{[^ }][^}]*}[^|]\@=' end='[^
 ""  | # .
 ""  will be colored like heading 1, not like paragraph start.
 syn match hi_xi_ht "^[^ ].* @$" contains=hi_xi_end
-syn match hi_xi_h1 "^[^ ].* \.$" contains=hi_xi_end
-syn match hi_xi_h2 "^ \{2\}[^ ].* \.$" contains=hi_xi_end
-syn match hi_xi_h3 "^ \{4\}[^ ].* \.$" contains=hi_xi_end
-syn match hi_xi_h4 "^ \{6\}[^ ].* \.$" contains=hi_xi_end
-syn match hi_xi_h5 "^ \{8\}[^ ].* \.$" contains=hi_xi_end
-syn match hi_xi_h6 "^ \{10\}[^ ].* \.$" contains=hi_xi_end
+syn match hi_xi_h1 "^[^ ].* \.$" contains=hi_xi_end,hi_xi_link
+syn match hi_xi_h2 "^ \{2\}[^ ].* \(\.\|\[.\+\] \.\)$" contains=hi_xi_end,hi_xi_link
+syn match hi_xi_h3 "^ \{4\}[^ ].* \(\.\|\[.\+\] \.\)$" contains=hi_xi_end,hi_xi_link
+syn match hi_xi_h4 "^ \{6\}[^ ].* \(\.\|\[.\+\] \.\)$" contains=hi_xi_end,hi_xi_link
+syn match hi_xi_h5 "^ \{8\}[^ ].* \(\.\|\[.\+\] \.\)$" contains=hi_xi_end,hi_xi_link
+syn match hi_xi_h6 "^ \{10\}[^ ].* \(\.\|\[.\+\] \.\)$" contains=hi_xi_end,hi_xi_link
 
 ""  Headers with embedded links.
 ""! Lookeahed assertion to match only if line contains region end.
-syn match hi_xi_h1_link '^[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
-syn match hi_xi_h2_link '^ \{2\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
-syn match hi_xi_h3_link '^ \{4\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
-syn match hi_xi_h4_link '^ \{6\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
-syn match hi_xi_h5_link '^ \{8\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
-syn match hi_xi_h6_link '^ \{10\}[^ ].*[^ ]\[\] \.$' contains=hi_xi_link_end
-syn match hi_xi_link_end '[^ ]\[\] \.$'ms=s+1 contains=hi_xi_end contained
+syn match hi_xi_h1_link '^[^ ].*[^ ]\[\] \(\.\|\[.\+\] \.\)$' contains=hi_xi_end,hi_xi_link_end,hi_xi_link
+syn match hi_xi_h2_link '^ \{2\}[^ ].*[^ ]\[\] \(\.\|\[.\+\] \.\)$' contains=hi_xi_end,hi_xi_link_end,hi_xi_link
+syn match hi_xi_h3_link '^ \{4\}[^ ].*[^ ]\[\] \(\.\|\[.\+\] \.\)$' contains=hi_xi_end,hi_xi_link_end,hi_xi_link
+syn match hi_xi_h4_link '^ \{6\}[^ ].*[^ ]\[\] \(\.\|\[.\+\] \.\)$' contains=hi_xi_end,hi_xi_link_end,hi_xi_link
+syn match hi_xi_h5_link '^ \{8\}[^ ].*[^ ]\[\] \(\.\|\[.\+\] \.\)$' contains=hi_xi_end,hi_xi_link_end,hi_xi_link
+syn match hi_xi_h6_link '^ \{10\}[^ ].*[^ ]\[\] \(\.\|\[.\+\] \.\)$' contains=hi_xi_end,hi_xi_link_end,hi_xi_link
+syn match hi_xi_link_end '[^ ]\[\] \(\.$\|\)'ms=s+1 contains=hi_xi_end contained
 syn match hi_xi_end ' \(\.\|@\)$' contained
 
 ""  Synchronize syntax by looking 1 lines back (xi have no multiline syntax).

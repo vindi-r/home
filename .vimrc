@@ -11,6 +11,10 @@ endif
 ""  No compatibility with VI.
 ""! Can't be set at runtime, must be in vimrc file.
 set nocompatible
+""! Patched vim with true color support
+let &t_8f="\e[38;2;%ld;%ld;%ldm"
+let &t_8b="\e[48;2;%ld;%ld;%ldm"
+set guicolors
 ""  Disable beeps.
 set vb
 ""  Scan first 5 and last 5 lines of any opened file for vim settings.
@@ -212,8 +216,10 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 ""! Required for snipmate.
 Plugin 'vim-scripts/tlib'
 
-""! Required for syntastic.
-Plugin 'pydave/AsyncCommand'
+if has("clientserver")
+  ""! Required for syntastic.
+  Plugin 'pydave/AsyncCommand'
+endif
 
 ""! Required for patched autocomplpopup
 Plugin 'git-mirror/vim-l9'
@@ -293,6 +299,7 @@ let g:syntastic_mode_map = {'mode': 'passive'}
 Plugin 'derekwyatt/vim-fswitch'
 
 ""  File explorer.
+""  Bookmarks managed via :Bookmark, :ClearBookmarks
 Plugin 'scrooloose/nerdtree'
 ""  Show arrows instead of '+' and bars.
 let NERDTreeDirArrows = 1
@@ -353,6 +360,9 @@ Plugin 'kien/ctrlp.vim'
 ""  Markdown syntax highlighting.
 Plugin 'tpope/vim-markdown'
 
+""  Swift syntax highlighting.
+Plugin 'keith/swift.vim'
+
 ""  Bookmarks list
 Plugin 'MattesGroeger/vim-bookmarks'
 ""! Default mapping starts with 'm' which conflicts with NERDTree menu.
@@ -377,6 +387,9 @@ Plugin 'editorconfig/editorconfig-vim'
 
 ""  Better CSS syntax highlighting.
 Plugin 'hail2u/vim-css3-syntax'
+
+""  xterm-256 color table
+Plugin 'guns/xterm-color-table.vim'
 
 call vundle#end()
 filetype plugin on
@@ -429,6 +442,8 @@ nnoremap <leader>ef :call EyeTreeFind()<cr>
 nnoremap <leader>eb :Bookmark<cr>
 nnoremap <leader>[ :call EyeErrPrev()<cr>
 nnoremap <leader>] :call EyeErrNext()<cr>
+nnoremap <leader>{ :cp<cr>
+nnoremap <leader>} :cn<cr>
 nnoremap <leader>xv :call EyeExecViml()<cr>
 nnoremap <leader>a :Ack<space>
 nnoremap <leader>fj :call EyeFontInc()<cr>

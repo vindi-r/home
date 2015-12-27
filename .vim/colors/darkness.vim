@@ -32,11 +32,11 @@ let g:colors_name = "darkness"
 ""  # |hi_bg_dim|: dark background for parts that are not text: folds etc.
 ""  # |hi_bg_menu|: darkest color for menu background.
 
-hi hi_txt           guifg=#F0B16C     guibg=#213449
-hi hi_gui           guifg=#000000     guibg=#F0F0F0
-hi hi_gui_inactive  guifg=#000000     guibg=#808080
-hi hi_gui_notxt     guifg=#F0F0F0     guibg=#F0F0F0
-hi hi_gui_warn      guifg=#000000     guibg=#CC0000
+hi hi_txt           guifg=#F0B16C guibg=#213449 ctermfg=215 ctermbg=236
+hi hi_gui           guifg=#000000 guibg=#F0F0F0
+hi hi_gui_inactive  guifg=#000000 guibg=#808080
+hi hi_gui_notxt     guifg=#F0F0F0 guibg=#F0F0F0
+hi hi_gui_warn      guifg=#000000 guibg=#CC0000
 
 " Name of top level item. Functon in programming language, heading 1 in xi.
 hi hi_name_top      guifg=#00F080
@@ -141,7 +141,7 @@ hi! link StatusLineNC hi_gui_inactive
 " Highlighted cursor line.
 hi! link CursorLine hi_bg_cur
 " BUG: if 'hi link' is used, status line is updated incorrectly.
-" If defined manually, guifg and guibg are switched
+" If defined manually, guifg and guibg are *switched*.
 " au InsertEnter * hi! link StatusLine hi_gui_warn
 " au InsertLeave * hi! link StatusLine hi_gui
 au InsertEnter * hi! statusline guifg=#CC0000 guibg=#000000

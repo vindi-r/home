@@ -12,3 +12,14 @@
 [color "diff"]
   meta = black bold
 
+[diff]
+	tool = delta
+[difftool]
+	prompt = false
+[difftool "delta"]
+	cmd = delta \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

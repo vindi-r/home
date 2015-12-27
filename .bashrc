@@ -9,6 +9,8 @@ export PATH=$PATH:./node_modules/.bin
 export GIT_SSL_NO_VERIFY=true
 ##  256-colors in terminal for apps that knows how to use it.
 export TERM=xterm-256color
+##  Used by apps to launch text editor.
+export EDITOR=vim
 ##  Required for VIM, otherwise it will start creating dirs names '$TMP'.
 if test -z $TMP; then
   export TMP=~/tmp
@@ -25,6 +27,10 @@ if test -z $JAVA_HOME; then
 fi
 ##  gnome-ssh-askpass don't work.
 unset SSH_ASKPASS
+
+##  Required for 'go' to function
+export GOPATH=~/go
+export PATH=$GOPATH/bin:$PATH
 
 ##  OSX?
 if test "$(uname)" == "Darwin"; then
@@ -95,17 +101,19 @@ export PATH=$PATH:~/.local/bin
 
 ##  git aliases
 alias gl='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
-alias gs='git status'
+alias gs='git status -s'
 alias ga='git add -N'
 alias gb='git branch'
 alias gc='git commit -am'
 alias gd='git diff --ignore-space-change'
-alias go='git checkout'
+alias gdt='git difftool --ignore-space-change'
+##  Avoid conflict with 'go' programming language.
+alias gg='git checkout'
 alias gm='git mv'
 ##  'git push'
 alias gp='git push'
 ##  'git up'
-alias gu='git pull'
+alias gu='git pull --all'
 
 ##  svn aliases
 alias svl='svn log'

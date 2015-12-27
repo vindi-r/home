@@ -73,8 +73,8 @@ fun! XiGoLink()
   ""! |s:nPos| starts from 1 and s:sLine[ ] indexed from 0.
   let s:sLink = s:sLine[s:nLeft - 1 : s:nRight - 1]
 
-  ""* Remove prefix like '*' in captions like '* classname'
-  let s:sLink = substitute(s:sLink, "^[^a-zA-Z]\\s\\+", "", "")
+  ""* Remove prefix like '* ' in captions like '* classname'
+  let s:sLink = substitute(s:sLink, "^[^a-zA-Z]\\+", "", "")
 
   let s:sFile = ""
   for s:nCharIdx in range(0, len(s:sLink) - 1)

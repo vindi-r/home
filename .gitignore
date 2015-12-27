@@ -326,4 +326,14 @@ tmp/
 .babel.json
 .gradle/
 .node_repl_history
+.bash_sessions/
+go/
+.bash_profile.backup
+google-cloud-sdk/
+# swift repl creates this on osx
+.lldb/
+# crossover for mac
+winetricks
+.mailcap
+.mime.types
 
