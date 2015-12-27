@@ -11,10 +11,12 @@ endif
 ""  No compatibility with VI.
 ""! Can't be set at runtime, must be in vimrc file.
 set nocompatible
-""! Patched vim with true color support
-let &t_8f="\e[38;2;%ld;%ld;%ldm"
-let &t_8b="\e[48;2;%ld;%ld;%ldm"
-set guicolors
+if has("termtruecolor")
+  ""! Patched vim with true color support
+  let &t_8f="\e[38;2;%ld;%ld;%ldm"
+  let &t_8b="\e[48;2;%ld;%ld;%ldm"
+  set guicolors
+endif
 ""  Disable beeps.
 set vb
 ""  Scan first 5 and last 5 lines of any opened file for vim settings.
@@ -61,7 +63,7 @@ set guitablabel=%t
 ""  tool commands. Don't change directory while opening file.
 set noautochdir
 ""  Use english for VIM interface regardless of OS locale.
-if has( "unix" )
+if has("unix")
   language en_US.UTF-8
 else
   language us

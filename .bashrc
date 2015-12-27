@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # coding:utf-8 vi:et:ts=2
 
+##  Disable terminal/ssh freeze with C-S:
+stty -ixon
 ##  Don't create |.pyc| files while executing python code from console.
 export PYTHONDONTWRITEBYTECODE=1
 ##* Usefull for npm tools that are not installed globally
