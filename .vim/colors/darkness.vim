@@ -108,7 +108,7 @@ hi link hi_nontxt    hi_string
 
 " All non-overriden background. All non-specified foreground.
 " BUG: Will not work if 'hi link Normal' is used.
-hi Normal           guifg=#F0B16C     guibg=#213449
+hi Normal guifg=#F0B16C guibg=#213449 ctermfg=215 ctermbg=236
 " Color of '~' symbol displayed instead of non-existent lines and background
 " of lines where '~' is displayed.
 hi! link nontext hi_invis_dim
