@@ -264,13 +264,17 @@ fu! EyeTreeToggle()
       let g:isEyeNerdTreeVisible = 0
       NERDTreeClose
       ""  NERDTree not visible - decrease window width by NERDTree width.
-      exec 'set columns-=' . g:NERDTreeWinSize
+      if has('gui_running')
+        exec 'set columns-=' . g:NERDTreeWinSize
+      endif
     else
       let g:isEyeNerdTreeVisible = 1
       NERDTree
       wincmd W
       ""  Increase window width by NERDTree width.
-      exec 'set columns+=' . g:NERDTreeWinSize
+      if has('gui_running')
+        exec 'set columns+=' . g:NERDTreeWinSize
+      endif
       redraw
       echo "CWD is " . getcwd()
     endif
@@ -385,6 +389,8 @@ fu! EyeAg(args)
     ""  | ag --nocolor --ignore-case -G django -i collection
     let l:options = '--nocolor --nogroup --column --ignore-case'
     silent execute 'grep! ' . l:options . ' ' . a:args
+    ""  grep breaks console in terminal mode.
+    redraw!
   finally
     let &grepprg = l:grepProg
     let &grepformat = l:grepFormat

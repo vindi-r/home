@@ -11,6 +11,11 @@ endif
 ""  No compatibility with VI.
 ""! Can't be set at runtime, must be in vimrc file.
 set nocompatible
+
+""  Stub function that does nothing, ex Python 'pass' syntax.
+function Pass()
+endfunction
+
 if has("termtruecolor")
   ""! Patched vim with true color support
   let &t_8f="\e[38;2;%ld;%ld;%ldm"
@@ -207,7 +212,14 @@ set fileformats=unix,dos
 ""  Plugin manager start
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+
+if &runtimepath =~ 'Vundle.vim'
+  call vundle#begin()
+endif
+
+if !exists(':Plugin')
+  command -nargs=? Plugin :call Pass()
+endif
 
 ""* Plugin manager itself.
 Plugin 'gmarik/Vundle.vim'
@@ -341,6 +353,7 @@ let NERDTreeIgnore = [
 ""! Temporary disable since it calls 'ctags' on each buffer switch which
 ""  is terrible slow.
 ""  Plugin 'majutsushi/tagbar'
+
 if has("win32")
   let g:tagbar_ctags_bin='~/apps/ctags/ctags.exe'
 endif
@@ -393,14 +406,18 @@ Plugin 'hail2u/vim-css3-syntax'
 ""  xterm-256 color table
 Plugin 'guns/xterm-color-table.vim'
 
-call vundle#end()
+if exists('*vundle#end')
+  call vundle#end()
+endif
 filetype plugin on
 
 ""! Patch plugin function AFTER plugins are loaded.
 
 ""  Supress message spam
-fun! nerdtree#echo(...)
-endfun
+if exists('*nerdtree#echo')
+  fun! nerdtree#echo(...)
+  endfun
+endif
 
 ""@ Commands.
 
@@ -591,7 +608,9 @@ nmap [c [czz
 
 if &diff
   ""  Disable folding.
-  set lines=50 columns=180
+  if has('gui_running')
+    set lines=50 columns=180
+  endif
   function! PostCfgDiff()
     ""  Execute 'disable folding' command in both diff windows.
     windo set nofoldenable
@@ -602,18 +621,21 @@ if &diff
   ""  Fix SourceSafe behaviour that renames all into .tmp
   au BufRead *.tmp set filetype=cpp
 else
-  if v:version >= 703
-    ""  Number of lines for macbook 12 2005
-    set lines=39
-    if has("mac")
-      ""  Number of columns for macbook 12 2005
-      set columns=88
+  ""  Alter size only in gui mode, in terminal it's always 'fullscreen'
+  if has('gui_running')
+    if v:version >= 703
+      ""  Number of lines for macbook 12 2005
+      set lines=39
+      if has("mac")
+        ""  Number of columns for macbook 12 2005
+        set columns=88
+      else
+        ""  Version 7.3+ has right margin, so set with do ~half of 1280 pixels.
+        set columns=86
+      endif
     else
-      ""  Version 7.3+ has right margin, so set with do ~half of 1280 pixels.
-      set columns=86
+      set lines=39 columns=78
     endif
-  else
-    set lines=39 columns=78
   endif
 endif
 
@@ -663,12 +685,28 @@ function! SetBufCfg()
 endfunc
 au BufEnter * call SetBufCfg()
 
+function! OnInsertEnter()
+  ""  BUG: if 'hi link' is used, status line is updated incorrectly.
+  ""  If defined manually, guifg and guibg are *switched*.
+  " au InsertEnter * hi! link StatusLine hi_gui_warn
+  " au InsertLeave * hi! link StatusLine hi_gui
+  hi! statusline guifg=#CC0000 guibg=#000000 ctermfg=160 ctermbg=215
+endfunction
+
+function! OnInsertLeave()
+  hi! statusline guifg=#F0F0F0 guibg=#000000 ctermfg=236 ctermbg=215
+  ""! Actual status change is few seconds after it's updated.
+endfunction
+
+au InsertEnter * call OnInsertEnter()
+au InsertLeave * call OnInsertLeave()
+
 function! OnEnter()
   ""  Required to disable both audio and visual beeps. Can't be set in
   ""  normal section since it is rsetted on GUI start.
   set t_vb=
   ""  Remove stock buttons (will raise error in text mode).
-  if has( 'gui_running' )
+  if has('gui_running')
     aunmenu ToolBar.
     amenu ToolBar.wiki :e ~/Dropbox/info/kb_my/index.xi<CR>
     tmenu ToolBar.wiki Open wiki index.
@@ -687,11 +725,10 @@ function! OnEnter()
   ""  Shows minibufexpl first so NERDTree and taglist displayed after it
   ""  takes full left and right columns. This way pressing <down> in
   ""  minibufexpl window will got to work buffers instead of NERDTree/tags.
-  if exists( ':MBEOpen' )
+  if exists(':MBEOpen')
     MBEOpen
   endif
   ""  Show NERDTree.
-  ""! Before minibufexpl, so minibufexpl will be atop of all window.
   call EyeTreeToggle()
   " vim-indent-guides plugin colors
   hi! IndentGuidesOdd  guibg=#162636
