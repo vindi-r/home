@@ -22,6 +22,13 @@ if has("termtruecolor")
   let &t_8b="\e[48;2;%ld;%ld;%ldm"
   set guicolors
 endif
+
+""  Correct cursor shape under TMUX
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+endif
+
 ""  Disable beeps.
 set vb
 ""  Scan first 5 and last 5 lines of any opened file for vim settings.
@@ -87,6 +94,8 @@ set complete-=i
 ""  disables 'no write since last change' error while switching from
 ""  unsaved buffer.
 set hidden
+""  Prevents delays while switching from insert mode to normal mode in tmux.
+set ttimeoutlen=50
 
 if v:version >= 703
   ""  Persistent undo on file close (minibufexpl close files).
@@ -687,15 +696,24 @@ au BufEnter * call SetBufCfg()
 
 function! OnInsertEnter()
   ""  BUG: if 'hi link' is used, status line is updated incorrectly.
-  ""  If defined manually, guifg and guibg are *switched*.
   " au InsertEnter * hi! link StatusLine hi_gui_warn
   " au InsertLeave * hi! link StatusLine hi_gui
-  hi! statusline guifg=#CC0000 guibg=#000000 ctermfg=160 ctermbg=215
+  if has('gui_running')
+    ""  BUG: If defined manually, guifg and guibg are *switched*.
+    hi! statusline guifg=#CC0000 guibg=#000000 ctermfg=160 ctermbg=215
+  else
+    hi! statusline guifg=#000000 guibg=#CC0000 ctermfg=215 ctermbg=160 
+  endif
+
 endfunction
 
 function! OnInsertLeave()
-  hi! statusline guifg=#F0F0F0 guibg=#000000 ctermfg=236 ctermbg=215
   ""! Actual status change is few seconds after it's updated.
+  if has('gui_running')
+    hi! statusline guifg=#F0F0F0 guibg=#000000 ctermfg=236 ctermbg=215
+  else
+    hi! statusline guifg=#000000 guibg=#F0F0F0 ctermfg=215 ctermbg=236
+  endif
 endfunction
 
 au InsertEnter * call OnInsertEnter()
