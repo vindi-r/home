@@ -72,8 +72,6 @@ if test "$(uname)" == "Darwin"; then
   ##  brew install android-sdk
   export ANDROID_HOME=/usr/local/opt/android-sdk
 
-  export PS1='\[\e[37m\]\W\[\e[32m\]$(~/.git-radar/git-radar --bash --fetch)\[\e[33m\] \$ \[\e[37m\]'
-
 else
   ##  Remap caps lock to backspace.
   # gsettings set org.gnome.desktop.input-sources xkb-options "['caps:backspace']"
@@ -127,6 +125,10 @@ alias svc='svn commit -m'
 alias cdh='cd ~'
 alias cdd='cd ~/Documents'
 alias cdsp='cd ~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins'
+
+if test -d ~/.git-radar; then
+  export PS1='\[\e[37m\]\W\[\e[32m\]$(~/.git-radar/git-radar --bash --fetch)\[\e[33m\] \$ \[\e[37m\]'
+fi
 
 venv() {
   if ! test -d ./.env; then
