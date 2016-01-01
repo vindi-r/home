@@ -448,7 +448,7 @@ command VS :call EyeVerticalSplit()
 nnoremap <silent> <C-o> :call EyeJumpPrev()<cr>
 nnoremap <silent> <C-i> :call EyeJumpNext()<cr>
 ""  C-n is 'new tab' in browser.
-inoremap <Tab> <C-n>
+inoremap <C-L> <C-n>
 command W :call EyeBufferSave()
 command! -bang -nargs=* -complete=file Ack :call EyeAg(<q-args>)
 ""  Better split navigation.
