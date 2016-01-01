@@ -142,3 +142,6 @@ venv() {
   source ./.env/bin/activate
 }
 
+##  For ~/.install_... to detect if file already sourced.
+export BASHRC_LOADED=1
+
