@@ -336,4 +336,5 @@ google-cloud-sdk/
 winetricks
 .mailcap
 .mime.types
+.wget-hsts
 
