@@ -337,4 +337,6 @@ winetricks
 .mailcap
 .mime.types
 .wget-hsts
+.esmtp_queue/
+.mysql_history
 
