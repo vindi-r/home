@@ -236,6 +236,7 @@ Contacts
 .gimp-*
 .monitor
 .android
+Android
 .JIRAClient
 Application*
 Cookies
@@ -339,4 +340,6 @@ winetricks
 .wget-hsts
 .esmtp_queue/
 .mysql_history
+.AndroidStudio1.5/
+.java/
 
