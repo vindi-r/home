@@ -87,7 +87,10 @@ else
   CHROME_BIN=/opt/google/chrome/chrome
   alias chrome='GTK_IM_MODULE="" $CHROME_BIN --disk-cache-size=10000000'
 
-  true
+  ##  android studio installed?
+  if test -e ~/.local/android-studio/bin; then
+    export PATH=~/.local/android-studio/bin:$PATH
+  fi
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
