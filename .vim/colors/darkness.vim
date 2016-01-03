@@ -143,7 +143,7 @@ hi! link CursorLine hi_bg_cur
 hi! link Pmenu hi_bg_menu
 hi! link PmenuSel hi_bg_menu_cur
 " Highligh search results
-hi! link cSearch hi_bg_dim
+hi! link Search hi_bg_dim
 " Highligh current match during incremental search.
 hi! link IncSearch hi_bg_dim
 
