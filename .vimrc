@@ -203,8 +203,8 @@ set guicursor+=n:block-Cursor-blinkwait100-blinkon100-blinkoff100
 set nowrap
 ""  Backspace deletes chars
 set backspace=indent,eol,start
-""  Don' highlight all search matches (defaults for Fedora).
-set nohlsearch
+""  Highlight all search matches, <c-l> to remove highligh.
+set hlsearch
 "" Language map so normal mode commands will work in RU locale.
 " set langmap=ЙQ
 " set spell
@@ -573,6 +573,8 @@ nnoremap n nzz
 nnoremap <S-n> <S-n>zz
 "" |x| will not put text into register. Use nnoremap to prevent recursion.
 nnoremap x "_x
+""  Redraw also removes current search highlight (mapping to c-[ has bugs).
+nnoremap <c-l> :nohl<cr><c-l>
 ""n Quotes are used to pass file name in quotes on windows. That will handle
 ""  paths with spaces correctly.
 ""n |silent| is used to prevent 'hit Enter to continue' prompt.
