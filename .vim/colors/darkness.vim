@@ -142,6 +142,8 @@ hi! link StatusLineNC hi_gui_inactive
 hi! link CursorLine hi_bg_cur
 hi! link Pmenu hi_bg_menu
 hi! link PmenuSel hi_bg_menu_cur
+" Highligh current match during incremental search.
+hi! link IncSearch hi_bg_dim
 
 hi Comment            guifg=#6B8199 gui=NONE
 " __FILE__ etc, ~'preprocessor'
