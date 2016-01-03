@@ -27,14 +27,14 @@ fi
 ##! Required by easy_install
 mkdir -p ~/.local/python-site-packages/
 
-if ! which pip 2>&1 > /dev/null; then
+if ! type pip 2>&1 > /dev/null; then
   ##  Works without sudo due to ~/.pydistutils.cfg and PYTHONPATH
-  if which easy_install 2>&1 > dev/null; then
+  if type easy_install 2>&1 > dev/null; then
     echo "info: installing pip via easy_install ..."
     easy_install pip > /dev/null
   else
     echo "info: installing pip via get-pip.py ..."
-    curl https://bootstrap.pypa.io/get-pip.py | python
+    curl -s https://bootstrap.pypa.io/get-pip.py | python > /dev/null
   fi
 else
   echo "skip: pip already installed"
@@ -54,5 +54,26 @@ if ! test -d ~/.vim/bundle/Vundle.vim; then
   git clone $URL ~/.vim/bundle/Vundle.vim 2>&1 > /dev/null
 else
   echo "skip: vundle already installed"
+fi
+
+if ! type tmux 2>&1 > /dev/null; then
+  echo "info: installing tmux with 32-bit color support ..."
+  if type apt-get 2>&1 > /dev/null; then
+    sudo apt-get install -y libevent-dev libncurses-dev > /dev/null
+  else
+    sudo dnf install -y libevent-devel ncurses-devel > /dev/null
+  fi
+  curl -L -s -o tmux.tar.gz https://goo.gl/oLa6qo
+  tar xf tmux.tar.gz > /dev/null
+  rm tmux.tar.gz
+  cd tmux-2.1
+  curl -L -s -o tmux.diff https://goo.gl/1WjB51
+  patch -p1 < tmux.diff > /dev/null
+  make > /dev/null
+  sudo make install > /dev/null
+  cd ..
+  rm -rf tmux-2.1
+else
+  echo "skip: tmux already installed"
 fi
 
