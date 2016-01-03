@@ -57,6 +57,21 @@ else
   echo "skip: mercurial already installed"
 fi
 
+if ! type ag 2>&1 > /dev/null; then
+  echo "info: installing ag ..."
+  if test "$OSTYPE" = "darwin"; then
+    brew install the_silver_searcher
+  else
+    if type apt-get 2>&1 > /dev/null; then
+      sudo apt-get install -y silversearcher-ag > /dev/null
+    else
+      sudo dnf install -y the_silver_searcher > /dev/null
+    fi
+  fi
+else
+  echo "skip: mercurial already installed"
+fi
+
 if ! type pip 2>&1 > /dev/null; then
   ##  Works without sudo due to ~/.pydistutils.cfg and PYTHONPATH
   if type easy_install 2>&1 > dev/null; then
