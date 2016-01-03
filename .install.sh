@@ -48,3 +48,11 @@ else
   echo "skip: git-radar already installed"
 fi
 
+if ! test -d ~/.vim/bundle/Vundle.vim; then
+  echo "info: installing vundle ..."
+  URL=https://github.com/VundleVim/Vundle.vim.git
+  git clone $URL ~/.vim/bundle/Vundle.vim 2>&1 > /dev/null
+else
+  echo "skip: vundle already installed"
+fi
+
