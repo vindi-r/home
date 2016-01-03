@@ -93,7 +93,9 @@ else
   fi
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+if test -e "$HOME/.rvm/scripts/rvm"; then
+  source "$HOME/.rvm/scripts/rvm"
+fi
 
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 ##  Alongside |.pydistutils.cfg| allows to call |easy_install| and |pip|
