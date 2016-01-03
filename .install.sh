@@ -27,6 +27,36 @@ fi
 ##! Required by easy_install
 mkdir -p ~/.local/python-site-packages/
 
+if ! type git 2>&1 > /dev/null; then
+  if test "$OSTYPE" = "darwin"; then
+    echo "error: no git found on osx"
+  else
+    echo "info: installing git ..."
+    if type apt-get 2>&1 > /dev/null; then
+      sudo apt-get install -y git > /dev/null
+    else
+      sudo dnf install -y git > /dev/null
+    fi
+  fi
+else
+  echo "skip: git already installed"
+fi
+
+if ! type hg 2>&1 > /dev/null; then
+  echo "info: installing mercurial ..."
+  if test "$OSTYPE" = "darwin"; then
+    brew install hgsvn
+  else
+    if type apt-get 2>&1 > /dev/null; then
+      sudo apt-get install -y hgsvn > /dev/null
+    else
+      sudo dnf install -y hgsvn > /dev/null
+    fi
+  fi
+else
+  echo "skip: mercurial already installed"
+fi
+
 if ! type pip 2>&1 > /dev/null; then
   ##  Works without sudo due to ~/.pydistutils.cfg and PYTHONPATH
   if type easy_install 2>&1 > dev/null; then
@@ -58,22 +88,54 @@ fi
 
 if ! type tmux 2>&1 > /dev/null; then
   echo "info: installing tmux with 32-bit color support ..."
-  if type apt-get 2>&1 > /dev/null; then
-    sudo apt-get install -y libevent-dev libncurses-dev > /dev/null
+  if test "$OSTYPE" = "darwin"; then
+    brew install libevent-dev libncurses-dev > /dev/null
   else
-    sudo dnf install -y libevent-devel ncurses-devel > /dev/null
+    if type apt-get 2>&1 > /dev/null; then
+      sudo apt-get install -y libevent-dev libncurses-dev > /dev/null
+    else
+      sudo dnf install -y libevent-devel ncurses-devel > /dev/null
+    fi
   fi
   curl -L -s -o tmux.tar.gz https://goo.gl/oLa6qo
   tar xf tmux.tar.gz > /dev/null
   rm tmux.tar.gz
-  cd tmux-2.1
+  cd ./tmux-2.1
   curl -L -s -o tmux.diff https://goo.gl/1WjB51
   patch -p1 < tmux.diff > /dev/null
   make > /dev/null
   sudo make install > /dev/null
   cd ..
-  rm -rf tmux-2.1
+  rm -rf ./tmux-2.1
 else
   echo "skip: tmux already installed"
+fi
+
+if ! type vim 2>&1 > /dev/null; then
+  echo "info: installing vim with 32-bit color support ..."
+  if test "$OSTYPE" = "darwin"; then
+    brew install python-dev libncurses-dev > /dev/null
+  else
+    if type apt-get 2>&1 > /dev/null; then
+      sudo apt-get install -y python-dev libncurses-dev > /dev/null
+    else
+      sudo dnf install -y python-devel ncurses-devel > /dev/null
+    fi
+  fi
+  hg clone https://bitbucket.org/ZyX_I/vim > /dev/null
+  cd ./vim/src
+  ./configure --with-features=huge \
+    --enable-multibyte \
+    --enable-rubyinterp \
+    --enable-pythoninterp \
+    --with-python-config-dir=/usr/lib64/python2.7/config/ \
+    --enable-luainterp \
+    --enable-termtruecolor > /dev/null
+  make > /dev/null
+  sudo make install > /dev/null
+  cd ./../../
+  rm -rf ./vim
+else
+  echo "skip: vim already installed"
 fi
 
