@@ -20,13 +20,6 @@ fi
 if test -z $TEMP; then
   export TEMP=~/tmp
 fi
-##  Required for Android Studio
-if test -z $JAVA_HOME; then
-  ##  Fedora?
-  if test -e /etc/alternatives/java_sdk; then
-    export JAVA_HOME=/etc/alternatives/java_sdk
-  fi
-fi
 ##  gnome-ssh-askpass don't work.
 unset SSH_ASKPASS
 
@@ -91,6 +84,9 @@ else
   if test -e ~/.local/android-studio/bin; then
     export PATH=~/.local/android-studio/bin:$PATH
   fi
+
+  ##  Official SDK symlinks this to lates install.
+  export JAVA_HOME=/usr/java/latest
 fi
 
 if test -e "$HOME/.rvm/scripts/rvm"; then

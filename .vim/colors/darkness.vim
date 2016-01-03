@@ -173,4 +173,5 @@ hi! link Character    hi_string
 " class structure union
 hi! link structure    hi_keyword
 hi! link Number       hi_warn
+hi! link ToDo         hi_accent
 
