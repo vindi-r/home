@@ -10,7 +10,7 @@ else
 fi
 
 ##  OSX?
-if test "$OSTYPE" == "darwin"; then
+if test "$OSTYPE" = "darwin"; then
   echo "info: configuring ~/.bashrc autoload ..."
   echo '\
     #!/bin/sh\
@@ -28,9 +28,14 @@ fi
 mkdir -p ~/.local/python-site-packages/
 
 if ! which pip 2>&1 > /dev/null; then
-  echo "info: installing pip ..."
   ##  Works without sudo due to ~/.pydistutils.cfg and PYTHONPATH
-  easy_install pip > /dev/null
+  if which easy_install 2>&1 > dev/null; then
+    echo "info: installing pip via easy_install ..."
+    easy_install pip > /dev/null
+  else
+    echo "info: installing pip via get-pip.py ..."
+    curl https://bootstrap.pypa.io/get-pip.py | python
+  fi
 else
   echo "skip: pip already installed"
 fi
