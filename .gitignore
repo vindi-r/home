@@ -342,4 +342,6 @@ winetricks
 .mysql_history
 .AndroidStudio1.5/
 .java/
+.indicator-sysmonitor.json
+StudioProjects/
 
