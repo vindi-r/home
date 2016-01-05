@@ -534,8 +534,6 @@ function SigmaWorkspace()
   let l:sCmd .= " projectfiles "
   call system( l:sCmd )
 endf
-" nmap <C-S-F1> <esc>:call SigmaWorkspace()<cr>
-nmap <C-S-F1> <esc>:NERDTreeToggle<cr>
 
 function SigmaToc()
   let l:sCmd = "python "
