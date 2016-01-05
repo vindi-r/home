@@ -203,7 +203,7 @@ set guicursor+=n:block-Cursor-blinkwait100-blinkon100-blinkoff100
 set nowrap
 ""  Backspace deletes chars
 set backspace=indent,eol,start
-""  Highlight all search matches, <c-]> to remove highligh.
+""  Highlight all search matches, <c-/> to remove highligh.
 set hlsearch
 "" Language map so normal mode commands will work in RU locale.
 " set langmap=ЙQ
@@ -578,7 +578,8 @@ nnoremap <S-n> <S-n>zz
 "" |x| will not put text into register. Use nnoremap to prevent recursion.
 nnoremap x "_x
 ""  Removes current search highlight (mapping to c-[ has bugs).
-nnoremap <c-]> :nohl<cr>
+""! C-_ is C-/
+nnoremap <c-_> :nohl<cr>
 ""n Quotes are used to pass file name in quotes on windows. That will handle
 ""  paths with spaces correctly.
 ""n |silent| is used to prevent 'hit Enter to continue' prompt.
@@ -727,17 +728,23 @@ endfunction
 au InsertEnter * call OnInsertEnter()
 au InsertLeave * call OnInsertLeave()
 
+
+""! Called after .vimrc is loaded and 'plugins' dir is processed.
 function! OnEnter()
+
   ""  Required to disable both audio and visual beeps. Can't be set in
   ""  normal section since it is rsetted on GUI start.
   set t_vb=
+
   ""  Remove stock buttons (will raise error in text mode).
   if has('gui_running')
     aunmenu ToolBar.
     amenu ToolBar.wiki :e ~/Dropbox/info/kb_my/index.xi<CR>
     tmenu ToolBar.wiki Open wiki index.
   endif
+
   let l:sPath = expand( '%:p' )
+
   ""  Current buffer shows anything? (buffers with NERDTree or
   ""  minibufexpl will have path as CWD + bufname).
   if l:sPath == ''
@@ -746,19 +753,36 @@ function! OnEnter()
     ""  Vim will not restore coloring after restoring session.
     filetype detect
   endif
+
   ""  Switch CWD to home.
   cd ~/Documents
+
   ""  Shows minibufexpl first so NERDTree and taglist displayed after it
   ""  takes full left and right columns. This way pressing <down> in
   ""  minibufexpl window will got to work buffers instead of NERDTree/tags.
   if exists(':MBEOpen')
     MBEOpen
   endif
+
   ""  Show NERDTree.
   call EyeTreeToggle()
+
   " vim-indent-guides plugin colors
   hi! IndentGuidesOdd  guibg=#162636
   hi! IndentGuidesEven guibg=#1C2C3C
+
+  function! NERDTreeCustomOpen(node)
+    ""! Correctly close empty buffers, if any.
+    call EyeOpenFile(a:node.path.str())
+  endfunction
+
+  call NERDTreeAddKeyMap({
+    \ 'key': 'o',
+    \ 'scope': "FileNode",
+    \ 'callback': "NERDTreeCustomOpen",
+    \ 'override': 1
+  \ })
+
 endfunc
 au VimEnter * call OnEnter()
 
