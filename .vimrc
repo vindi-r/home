@@ -203,7 +203,7 @@ set guicursor+=n:block-Cursor-blinkwait100-blinkon100-blinkoff100
 set nowrap
 ""  Backspace deletes chars
 set backspace=indent,eol,start
-""  Highlight all search matches, <c-l> to remove highligh.
+""  Highlight all search matches, <c-]> to remove highligh.
 set hlsearch
 "" Language map so normal mode commands will work in RU locale.
 " set langmap=ЙQ
@@ -257,6 +257,10 @@ Plugin 'fholgado/minibufexpl.vim'
 ""* Don't try to open buffers in windows with non-modifiable flag like
 ""  NERDTree or minibufexpl.
 let g:miniBufExplModSelTarget = 1
+""* Put minibufer below main window so C-L from nerdtree will swith to main
+""  windows instead of minibuffer. Where is no need to switch into minibufer
+""  explorer since buffers are switched via L-J/L-K
+let g:miniBufExplBRSplit = 1
 
 ""  Run bash/powershell/gdb inside vim.
 ""! Vim python support not compatible with ActivePython. Shell itself
@@ -573,8 +577,8 @@ nnoremap n nzz
 nnoremap <S-n> <S-n>zz
 "" |x| will not put text into register. Use nnoremap to prevent recursion.
 nnoremap x "_x
-""  Redraw also removes current search highlight (mapping to c-[ has bugs).
-nnoremap <c-l> :nohl<cr><c-l>
+""  Removes current search highlight (mapping to c-[ has bugs).
+nnoremap <c-]> :nohl<cr>
 ""n Quotes are used to pass file name in quotes on windows. That will handle
 ""  paths with spaces correctly.
 ""n |silent| is used to prevent 'hit Enter to continue' prompt.
