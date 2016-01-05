@@ -261,6 +261,8 @@ let g:miniBufExplModSelTarget = 1
 ""  windows instead of minibuffer. Where is no need to switch into minibufer
 ""  explorer since buffers are switched via L-J/L-K
 let g:miniBufExplBRSplit = 1
+""* Don't auto open.
+let g:miniBufExplorerAutoStart = 0
 
 ""  Run bash/powershell/gdb inside vim.
 ""! Vim python support not compatible with ActivePython. Shell itself
@@ -757,13 +759,6 @@ function! OnEnter()
   ""  Switch CWD to home.
   cd ~/Documents
 
-  ""  Shows minibufexpl first so NERDTree and taglist displayed after it
-  ""  takes full left and right columns. This way pressing <down> in
-  ""  minibufexpl window will got to work buffers instead of NERDTree/tags.
-  if exists(':MBEOpen')
-    MBEOpen
-  endif
-
   ""  Show NERDTree.
   call EyeTreeToggle()
 
@@ -773,6 +768,7 @@ function! OnEnter()
 
   function! NERDTreeCustomOpen(node)
     ""! Correctly close empty buffers, if any.
+    call EyeBufNew()
     call EyeOpenFile(a:node.path.str())
   endfunction
 
