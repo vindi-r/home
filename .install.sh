@@ -24,6 +24,17 @@ else
   echo "skip: ~/.bashrc already loaded"
 fi
 
+if ! type curl 2>&1 > /dev/null; then
+  echo "info: installing curl"
+  if type apt-get 2>&1 > /dev/null; then
+    sudo apt-get install -y curl > /dev/null
+  else
+    sudo dnf install -y curl > /dev/null
+  fi
+else
+  echo "skip: curl already installed"
+fi
+
 ##! Required by easy_install
 mkdir -p ~/.local/python-site-packages/
 

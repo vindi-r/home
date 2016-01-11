@@ -28,7 +28,7 @@ export GOPATH=~/go
 export PATH=$GOPATH/bin:$PATH
 
 ##  OSX?
-if test "$(uname)" == "Darwin"; then
+if test "$(uname)" = "Darwin"; then
   ##  Add color to |ls| output
   export CLICOLOR=1
   ##  Better 'ls' output colors.
