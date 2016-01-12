@@ -772,12 +772,14 @@ function! OnEnter()
     call EyeOpenFile(a:node.path.str())
   endfunction
 
-  call NERDTreeAddKeyMap({
-    \ 'key': 'o',
-    \ 'scope': "FileNode",
-    \ 'callback': "NERDTreeCustomOpen",
-    \ 'override': 1
-  \ })
+  if exists('*NERDTreeAddKeyMap')
+    call NERDTreeAddKeyMap({
+      \ 'key': 'o',
+      \ 'scope': "FileNode",
+      \ 'callback': "NERDTreeCustomOpen",
+      \ 'override': 1
+    \ })
+  endif
 
 endfunc
 au VimEnter * call OnEnter()
