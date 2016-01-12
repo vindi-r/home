@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##  Copy checked out home dir into actual home.
-function copyToHome () {
+copyToHome() {
   if test $(pwd) != ~; then
     echo "info: copying repository into ~ ..."
     cp -r . ~ > /dev/null
@@ -12,7 +12,7 @@ function copyToHome () {
 }
 
 
-function setBashAutoload () {
+setBashAutoload() {
   ##  OSX?
   if test "$OSTYPE" = "darwin"; then
     echo "info: configuring ~/.bashrc autoload ..."
