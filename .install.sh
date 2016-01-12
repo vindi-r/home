@@ -3,6 +3,8 @@
 if test "$0" = ".install.sh"; then
   echo "error: script should be sourced, not executed"
   exit
+else
+  echo "starting with script name $0"
 fi
 
 ##  Copy checked out home dir into actual home.
@@ -38,9 +40,18 @@ sourceBashConfig() {
 }
 
 
+createDocsDir() {
+  if ! test -e "~/Documents"; then
+    ##  Required for vim config.
+    mkdir ~/Documents
+  fi
+}
+
+
 copyToHome
 setBashAutoload
 sourceBashConfig
+createDocsDir
 
 
 if ! type curl 2>&1 > /dev/null; then
