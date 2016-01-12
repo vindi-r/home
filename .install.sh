@@ -150,6 +150,7 @@ if ! type tmux 2>&1 > /dev/null; then
   cd ./tmux-2.1
   curl -L -s -o tmux.diff https://goo.gl/1WjB51
   patch -p1 < tmux.diff > /dev/null
+  ./configure
   make > /dev/null
   sudo make install > /dev/null
   cd ..
@@ -171,11 +172,15 @@ if ! type vim 2>&1 > /dev/null; then
   fi
   hg clone https://bitbucket.org/ZyX_I/vim > /dev/null
   cd ./vim/src
+  PYTHON_LIB_DIR="/usr/lib/python2.7/config"
+  if test -e /usr/lib64; then
+    PYTHON_LIB_DIR="/usr/lib64/python2.7/config"
+  fi
   ./configure --with-features=huge \
     --enable-multibyte \
     --enable-rubyinterp \
     --enable-pythoninterp \
-    --with-python-config-dir=/usr/lib64/python2.7/config/ \
+    --with-python-config-dir=$PYTHON_LIB_DIR \
     --enable-luainterp \
     --enable-termtruecolor > /dev/null
   make > /dev/null
