@@ -75,10 +75,12 @@ set guitablabel=%t
 ""  tool commands. Don't change directory while opening file.
 set noautochdir
 ""  Use english for VIM interface regardless of OS locale.
-if has("unix")
-  language en_US.UTF-8
-else
-  language us
+if v:lang != "C"
+  if has("unix")
+    language en_US.UTF-8
+  else
+    language us
+  endif
 endif
 ""  Use system clipboard as default register for yank and paste:
 ""! Not working.
