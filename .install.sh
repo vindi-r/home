@@ -1,13 +1,17 @@
 #!/bin/bash
 
 ##  Copy checked out home dir into actual home.
-if test $(pwd) != ~; then
-  echo "info: copying repository into ~ ..."
-  cp -r . ~ > /dev/null
-  cd ~
-else
-  echo "skip: home dir already in place"
-fi
+function copyToHome() {
+  if test $(pwd) != ~; then
+    echo "info: copying repository into ~ ..."
+    cp -r . ~ > /dev/null
+    cd ~
+  else
+    echo "skip: home dir already in place"
+  fi
+}
+
+copyToHome
 
 ##  OSX?
 if test "$OSTYPE" = "darwin"; then
@@ -33,6 +37,17 @@ if ! type curl 2>&1 > /dev/null; then
   fi
 else
   echo "skip: curl already installed"
+fi
+
+if ! type make 2>&1 > /dev/null; then
+  echo "info: installing build tools"
+  if type apt-get 2>&1 > /dev/null; then
+    sudo apt-get install -y build-essential > /dev/null
+  else
+    sudo dnf groupinstall -y "Development Tools"  > /dev/null
+  fi
+else
+  echo "skip: build tools already installed"
 fi
 
 ##! Required by easy_install

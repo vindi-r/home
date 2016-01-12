@@ -455,6 +455,8 @@ nnoremap <silent> <C-o> :call EyeJumpPrev()<cr>
 nnoremap <silent> <C-i> :call EyeJumpNext()<cr>
 ""  C-n is 'new tab' in browser.
 inoremap <C-L> <C-n>
+""  C-p is meta key in docker
+inoremap <C-O> <C-p>
 command W :call EyeBufferSave()
 command! -bang -nargs=* -complete=file Ack :call EyeAg(<q-args>)
 ""  Better split navigation.
@@ -490,7 +492,7 @@ vnoremap <leader>y "+y
 vnoremap <leader>d "+d
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap <leader>o :call XiJumpBack()<cr>
+nnoremap <leader>o :call EyeJumpBack()<cr>
 nnoremap <leader>i :echo "not implemented"<cr>
 
 ""  Emacs-style editing on the command-line: >
