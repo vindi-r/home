@@ -11,15 +11,21 @@ function copyToHome() {
   fi
 }
 
-copyToHome
 
-##  OSX?
-if test "$OSTYPE" = "darwin"; then
-  echo "info: configuring ~/.bashrc autoload ..."
-  echo '\
-    #!/bin/sh\
-    . ~/.bashrc' > ~/.bash_profile
-fi
+function setBashAutoload() {
+  ##  OSX?
+  if test "$OSTYPE" = "darwin"; then
+    echo "info: configuring ~/.bashrc autoload ..."
+    echo '\
+      #!/bin/sh\
+      . ~/.bashrc' > ~/.bash_profile
+  fi
+}
+
+
+copyToHome
+setBashAutoload
+
 
 if ! test ${BASHRC_LOADED}; then
   echo "info: loading ~/.bashrc ..."
