@@ -23,16 +23,20 @@ setBashAutoload() {
 }
 
 
+sourceBashConfig() {
+  if ! test ${BASHRC_LOADED}; then
+    echo "info: loading ~/.bashrc ..."
+    . ~/.bashrc > /dev/null
+  else
+    echo "skip: ~/.bashrc already loaded"
+  fi
+}
+
+
 copyToHome
 setBashAutoload
+sourceBashConfig
 
-
-if ! test ${BASHRC_LOADED}; then
-  echo "info: loading ~/.bashrc ..."
-  . ~/.bashrc > /dev/null
-else
-  echo "skip: ~/.bashrc already loaded"
-fi
 
 if ! type curl 2>&1 > /dev/null; then
   echo "info: installing curl"
