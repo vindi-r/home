@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if test "$0" = ".install.sh"; then
+  echo "error: script should be sourced, not executed"
+  exit
+fi
+
 ##  Copy checked out home dir into actual home.
 copyToHome() {
   if test $(pwd) != ~; then
