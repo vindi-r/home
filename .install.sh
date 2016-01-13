@@ -170,7 +170,7 @@ if ! type tmux 2>&1 > /dev/null; then
   cd ./tmux-2.1
   curl -L -s -o tmux.diff https://goo.gl/1WjB51
   patch -p1 < tmux.diff > /dev/null
-  ./configure
+  ./configure > /dev/null
   make > /dev/null
   sudo make install > /dev/null
   cd ..
