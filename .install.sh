@@ -54,9 +54,9 @@ sourceBashConfig
 createDocsDir
 
 
-if ! type curl 2>&1 > /dev/null; then
+if ! which curl > /dev/null; then
   echo "info: installing curl"
-  if type apt-get 2>&1 > /dev/null; then
+  if which apt-get > /dev/null; then
     sudo apt-get install -y curl > /dev/null
   else
     sudo dnf install -y curl > /dev/null
@@ -65,9 +65,9 @@ else
   echo "skip: curl already installed"
 fi
 
-if ! type make 2>&1 > /dev/null; then
+if ! which make > /dev/null; then
   echo "info: installing build tools"
-  if type apt-get 2>&1 > /dev/null; then
+  if which apt-get > /dev/null; then
     sudo apt-get install -y build-essential > /dev/null
   else
     sudo dnf groupinstall -y "Development Tools"  > /dev/null
@@ -79,12 +79,12 @@ fi
 ##! Required by easy_install
 mkdir -p ~/.local/python-site-packages/
 
-if ! type git 2>&1 > /dev/null; then
+if ! which git > /dev/null; then
   if test "$OSTYPE" = "darwin"; then
     echo "error: no git found on osx"
   else
     echo "info: installing git ..."
-    if type apt-get 2>&1 > /dev/null; then
+    if which apt-get > /dev/null; then
       sudo apt-get install -y git > /dev/null
     else
       sudo dnf install -y git > /dev/null
@@ -94,12 +94,12 @@ else
   echo "skip: git already installed"
 fi
 
-if ! type hg 2>&1 > /dev/null; then
+if ! which hg > /dev/null; then
   echo "info: installing mercurial ..."
   if test "$OSTYPE" = "darwin"; then
     brew install hgsvn
   else
-    if type apt-get 2>&1 > /dev/null; then
+    if which apt-get > /dev/null; then
       sudo apt-get install -y hgsvn > /dev/null
     else
       sudo dnf install -y hgsvn > /dev/null
@@ -109,12 +109,12 @@ else
   echo "skip: mercurial already installed"
 fi
 
-if ! type ag 2>&1 > /dev/null; then
+if ! which ag > /dev/null; then
   echo "info: installing ag ..."
   if test "$OSTYPE" = "darwin"; then
     brew install the_silver_searcher
   else
-    if type apt-get 2>&1 > /dev/null; then
+    if which apt-get > /dev/null; then
       sudo apt-get install -y silversearcher-ag > /dev/null
     else
       sudo dnf install -y the_silver_searcher > /dev/null
@@ -124,9 +124,9 @@ else
   echo "skip: mercurial already installed"
 fi
 
-if ! type pip 2>&1 > /dev/null; then
+if ! which pip > /dev/null; then
   ##  Works without sudo due to ~/.pydistutils.cfg and PYTHONPATH
-  if type easy_install 2>&1 > dev/null; then
+  if which easy_install > dev/null; then
     echo "info: installing pip via easy_install ..."
     easy_install pip > /dev/null
   else
@@ -153,12 +153,12 @@ else
   echo "skip: vundle already installed"
 fi
 
-if ! type tmux 2>&1 > /dev/null; then
+if ! which tmux > /dev/null; then
   echo "info: installing tmux with 32-bit color support ..."
   if test "$OSTYPE" = "darwin"; then
     brew install libevent-dev libncurses-dev > /dev/null
   else
-    if type apt-get 2>&1 > /dev/null; then
+    if which apt-get > /dev/null; then
       sudo apt-get install -y libevent-dev libncurses-dev > /dev/null
     else
       sudo dnf install -y libevent-devel ncurses-devel > /dev/null
@@ -179,12 +179,12 @@ else
   echo "skip: tmux already installed"
 fi
 
-if ! type vim 2>&1 > /dev/null; then
+if ! which vim > /dev/null; then
   echo "info: installing vim with 32-bit color support ..."
   if test "$OSTYPE" = "darwin"; then
     brew install python-dev libncurses-dev > /dev/null
   else
-    if type apt-get 2>&1 > /dev/null; then
+    if which apt-get > /dev/null; then
       sudo apt-get install -y python-dev libncurses-dev > /dev/null
     else
       sudo dnf install -y python-devel ncurses-devel > /dev/null
