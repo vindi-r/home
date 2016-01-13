@@ -344,4 +344,5 @@ winetricks
 .java/
 .indicator-sysmonitor.json
 StudioProjects/
+IntelGraphicsProfiles/
 
