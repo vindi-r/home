@@ -143,6 +143,10 @@ venv() {
   source ./.env/bin/activate
 }
 
+freqdown() {
+  sudo cpupower frequency-set --min 2.4Ghz --max 2.4ghz
+}
+
 ##  For ~/.install_... to detect if file already sourced.
 export BASHRC_LOADED=1
 
