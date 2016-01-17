@@ -178,8 +178,10 @@ if ! which tmux > /dev/null; then
   curl -L -s -o tmux.diff https://goo.gl/1WjB51
   patch -p1 < tmux.diff > /dev/null
   ./configure > /dev/null
-  make > /dev/null
-  sudo make install > /dev/null
+  make 2>&1 > /dev/null
+  if test "$?" != "0"; then echo "failed"; fi
+  sudo make install 2>&1 > /dev/null
+  if test "$?" != "0"; then echo "failed"; fi
   cd ..
   rm -rf ./tmux-2.1
 else
@@ -210,8 +212,10 @@ if ! which vim > /dev/null; then
     --with-python-config-dir=$PYTHON_LIB_DIR \
     --enable-luainterp \
     --enable-termtruecolor > /dev/null
-  make > /dev/null
-  sudo make install > /dev/null
+  make 2>&1 > /dev/null
+  if test "$?" != "0"; then echo "failed"; fi
+  sudo make install 2>&1 > /dev/null
+  if test "$?" != "0"; then echo "failed"; fi
   cd ./../../
   rm -rf ./vim
 else
