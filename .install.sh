@@ -47,7 +47,8 @@ sourceBashConfig() {
 
 
 createDocsDir() {
-  if ! test -e "~/Documents"; then
+  if ! test -e ~/Documents; then
+    echo "info: creating ~/Documents ..."
     ##  Required for vim config.
     mkdir ~/Documents
   fi
