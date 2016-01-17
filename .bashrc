@@ -89,11 +89,11 @@ else
   export JAVA_HOME=/usr/java/latest
 fi
 
-if test -e "$HOME/.rvm/scripts/rvm"; then
-  source "$HOME/.rvm/scripts/rvm"
+if test -e ~/.rvm/scripts/rvm; then
+  source ~/.rvm/scripts/rvm
 fi
 
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=$PATH:~/.rvm/bin # Add RVM to PATH for scripting
 ##  Alongside |.pydistutils.cfg| allows to call |easy_install| and |pip|
 ##  without |sudo|.
 export PYTHONPATH=~/.local/python-site-packages
