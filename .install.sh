@@ -23,19 +23,15 @@ setBashAutoload() {
   ##  OSX?
   if test "$OSTYPE" = "darwin"; then
     echo "info: configuring ~/.bashrc autoload for osx..."
-    echo '\
-      #!/bin/sh\
-      . ~/.bashrc' > ~/.bash_profile
+    printf "#!/bin/sh\n. ~/.bashrc\n" > ~/.bash_profile
   else
     if ! test -e ~/.bash_profile; then
       ##  On Ubuntu '~/.profile' is used instead of '~/.bash_profile' to
       ##  source '~/.bashrc', but user-mode installs tend to modify
       ##  '~/.bash_profile', so create it.
       echo "info: configuring ~/.bash_profile usage for ubuntu..."
-      echo '\
-        #!/bin/sh\
-        . ~/.profile' > ~/.bash_profile
-      fi
+      printf "#!/bin/sh\n. ~/.profile\n" > ~/.bash_profile
+    fi
   fi
 }
 
