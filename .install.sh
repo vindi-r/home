@@ -133,7 +133,7 @@ fi
 
 if ! which pip > /dev/null; then
   ##  Works without sudo due to ~/.pydistutils.cfg and PYTHONPATH
-  if which easy_install > dev/null; then
+  if which easy_install > /dev/null; then
     echo "info: installing pip via easy_install ..."
     easy_install pip > /dev/null
   else
