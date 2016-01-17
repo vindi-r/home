@@ -147,7 +147,7 @@ fi
 if ! test -d ~/.git-radar; then
   echo "info: installing git-radar ..."
   URL=https://github.com/michaeldfallen/git-radar
-  git clone $URL .git-radar 2>&1 > /dev/null
+  git clone $URL .git-radar -q
 else
   echo "skip: git-radar already installed"
 fi
@@ -155,7 +155,7 @@ fi
 if ! test -d ~/.vim/bundle/Vundle.vim; then
   echo "info: installing vundle ..."
   URL=https://github.com/VundleVim/Vundle.vim.git
-  git clone $URL ~/.vim/bundle/Vundle.vim 2>&1 > /dev/null
+  git clone $URL ~/.vim/bundle/Vundle.vim -q
 else
   echo "skip: vundle already installed"
 fi
