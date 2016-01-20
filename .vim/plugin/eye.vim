@@ -246,8 +246,8 @@ endf
 
 
 fu! EyeXiOpen()
-  call EyeOpenFile('~/Dropbox/kb/index.xi')
-  cd ~/Dropbox/kb
+  call EyeOpenFile('~/Google\ Drive/kb/index.xi')
+  cd ~/Google\ Drive/kb
 endf
 
 

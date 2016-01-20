@@ -108,7 +108,7 @@ fun! XiGoLink()
   let g:xiJumplist = add(g:xiJumplist, expand('%:p'))
 
   ""  Open file in new buffer.
-  exec "e " . s:sFilePath
+  exec "e " . substitute(s:sFilePath, ' ', '\\ ', 'g')
 
   ""! If previous buffer was new empty buffer - it's auto deleted after
   ""  jump.
