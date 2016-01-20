@@ -27,7 +27,7 @@ fu! EyeBufNew()
   call <SID>focusNonsysWnd()
   let l:cwd = getcwd()
   :enew
-  exec "cd " . l:cwd
+  exec "cd " . substitute(l:cwd, ' ', '\\ ', 'g')
 endf
 
 
@@ -147,7 +147,7 @@ fu! EyeBufClose(...)
   enew
   exec "bd " . l:bufNr
   ""! Otherwise we will jupm to OS root.
-  exec "cd " . l:cwd
+  exec "cd " . substitute(l:cwd, ' ', '\\ ', 'g')
   return call('EyeBufCloseFin', ["last buffer closed"] + a:000)
 endf
 
@@ -204,7 +204,7 @@ fu! EyeCd(...)
     return <SID>msg("repository root not found", 'warn')
   endif
 
-  exec 'cd ' . l:path
+  exec "cd " . substitute(l:path, ' ', '\\ ', 'g')
   NERDTreeCWD
   normal gg
   ""* Restore current window since current window changed to
@@ -222,7 +222,7 @@ fu! EyeOpenFile(fileName)
   let l:bufNr = bufnr('%')
   ""  Open file in new buffer. This also adds current buffer to jumplist
   ""  So user can jump back with |C-O|.
-  exec "e " . l:filePath
+  exec "e " . substitute(l:filePath, ' ', '\\ ', 'g')
   ""! If previous buffer was new empty buffer - it's auto deleted after
   ""  opening new file.
   if buflisted(l:bufNr) && bufnr('%') != l:bufNr
@@ -246,7 +246,7 @@ endf
 
 
 fu! EyeXiOpen()
-  call EyeOpenFile('~/Google\ Drive/kb/index.xi')
+  call EyeOpenFile('~/Google Drive/kb/index.xi')
   cd ~/Google\ Drive/kb
 endf
 
