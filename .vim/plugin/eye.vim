@@ -246,8 +246,8 @@ endf
 
 
 fu! EyeXiOpen()
-  call EyeOpenFile('~/Google Drive/kb/index.xi')
-  cd ~/Google\ Drive/kb
+  call EyeOpenFile('~/xi/index.xi')
+  cd ~/xi
 endf
 
 
