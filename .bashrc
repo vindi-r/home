@@ -115,6 +115,31 @@ alias gm='git mv'
 alias gp='git push'
 ##  'git up'
 alias gu='git pull --all'
+##  "git all status"
+gas() {
+  git submodule foreach git status
+  git status
+}
+##  "git all diff"
+gad() {
+  git submodule foreach git diff
+  git diff
+}
+##  "git all commit"
+gac() {
+  git submodule foreach git commit -am "$1"
+  git commit -am "$1"
+}
+##  "git all push"
+gap() {
+  git submodule foreach git push
+  git push
+}
+##  "git all pull"
+gau() {
+  git pull
+  git submodule update --merge
+}
 
 ##  svn aliases
 alias svl='svn log'
