@@ -22,6 +22,9 @@ if test -z $TEMP; then
 fi
 ##  gnome-ssh-askpass don't work.
 unset SSH_ASKPASS
+##  make less display ASCII colors, quit if one screen and don't clear
+##  screen after it quits.
+export LESS="-R -F -X"
 
 ##  Required for 'go' to function
 export GOPATH=~/go
@@ -38,9 +41,6 @@ if test "$(uname)" = "Darwin"; then
   ##  |PYTHONDONTWRITEBYTECODE| don't work on OSX 10.8, default python is
   ##  64-bit that is not compatible with wxWidgets.
   # alias python="arch -i386 /usr/bin/python2.7 -B"
-
-  ##  |ls| is one column by default, as in powershell.
-  alias ls='ls -l'
 
   ##  custom svn installed?
   if test -e /opt/subversion/bin; then
@@ -71,9 +71,6 @@ else
 
   ##FIXME: Seems not persisting on Ubuntu, need to check why.
   # setterm -background black -foreground white
-
-  ##  |ls| is one column by default, as in powershell.
-  alias ls='ls -l --color'
 
   ##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
   ##  Disable disk cache so multiple chrome instances will not kill HDD.
@@ -151,6 +148,11 @@ alias svc='svn commit -m'
 alias cdh='cd ~'
 alias cdd='cd ~/Documents'
 alias cdsp='cd ~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins'
+
+##  |ls| is one column by default, as in powershell.
+alias ls='ls -l'
+##  Due to LESS options this will pass-through on one screen.
+alias ll='ls | less'
 
 if test -d ~/.git-radar; then
   export PS1='\[\e[37m\]\W\[\e[32m\]$(~/.git-radar/git-radar --bash --fetch)\[\e[33m\] \$ \[\e[37m\]'
