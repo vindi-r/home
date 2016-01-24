@@ -42,6 +42,9 @@ if test "$(uname)" = "Darwin"; then
   ##  64-bit that is not compatible with wxWidgets.
   # alias python="arch -i386 /usr/bin/python2.7 -B"
 
+  ##  |ls| is one column by default, as in powershell.
+  alias ls='ls -l'
+
   ##  custom svn installed?
   if test -e /opt/subversion/bin; then
     export PATH=/opt/subversion/bin:$PATH
@@ -71,6 +74,9 @@ else
 
   ##FIXME: Seems not persisting on Ubuntu, need to check why.
   # setterm -background black -foreground white
+
+  ##  |ls| is one column by default, as in powershell.
+  alias ls='ls -l --color'
 
   ##  GTK_IM_MODULE is set to 'xim' in ubuntu, lots of GTK errors in chrome.
   ##  Disable disk cache so multiple chrome instances will not kill HDD.
@@ -149,8 +155,6 @@ alias cdh='cd ~'
 alias cdd='cd ~/Documents'
 alias cdsp='cd ~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins'
 
-##  |ls| is one column by default, as in powershell.
-alias ls='ls -l'
 ##  Due to LESS options this will pass-through on one screen.
 alias ll='ls | less'
 
