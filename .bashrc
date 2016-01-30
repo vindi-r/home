@@ -128,6 +128,11 @@ gad() {
   git submodule foreach git diff
   git diff
 }
+##  "git all add"
+gaa() {
+  git submodule foreach git add -N .
+  git add -N .
+}
 ##  "git all commit"
 gac() {
   git submodule foreach git commit -am "$1"
