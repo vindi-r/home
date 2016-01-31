@@ -581,9 +581,10 @@ nnoremap n nzz
 nnoremap <S-n> <S-n>zz
 "" |x| will not put text into register. Use nnoremap to prevent recursion.
 nnoremap x "_x
-""  Removes current search highlight (mapping to c-[ has bugs).
+""  Removes current search highlight and clears screen
+""  (mapping to c-[ has bugs).
 ""! C-_ is C-/
-nnoremap <c-_> :nohl<cr>
+nnoremap <c-_> :nohl<cr>:redraw!<cr>
 ""n Quotes are used to pass file name in quotes on windows. That will handle
 ""  paths with spaces correctly.
 ""n |silent| is used to prevent 'hit Enter to continue' prompt.
