@@ -88,8 +88,10 @@ else
     export PATH=~/.local/android-studio/bin:$PATH
   fi
 
-  ##  Official SDK symlinks this to lates install.
-  export JAVA_HOME=/usr/java/latest
+  if test -e /usr/java/latest; then
+    ##  Official SDK symlinks this to lates install.
+    export JAVA_HOME=/usr/java/latest
+  fi
 fi
 
 if test -e ~/.rvm/scripts/rvm; then
