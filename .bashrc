@@ -5,6 +5,12 @@
 stty -ixon
 ##  Don't create |.pyc| files while executing python code from console.
 export PYTHONDONTWRITEBYTECODE=1
+##! Add npm global bin to path before local node_modules so tools that
+##  require both global and local installation like react-native can work.
+NPM_BIN=$(echo ~/.local/node-*/bin | tail -n1)
+if test -e $NPM_BIN; then
+  export PATH=$PATH:$NPM_BIN
+fi
 ##* Usefull for npm tools that are not installed globally
 export PATH=$PATH:./node_modules/.bin
 ##  git can clone from repos without certificates.
