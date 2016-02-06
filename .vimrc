@@ -391,6 +391,8 @@ Plugin 'kien/ctrlp.vim'
 
 ""  Markdown syntax highlighting.
 Plugin 'tpope/vim-markdown'
+""  Highlight fenced languages inside markdown.
+let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
 
 ""  Swift syntax highlighting.
 Plugin 'keith/swift.vim'
