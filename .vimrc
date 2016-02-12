@@ -417,7 +417,7 @@ Plugin 'digitaltoad/vim-jade'
 ""  | [*.php]
 ""  | indent_style = tab
 ""  | indent_size = 2
-Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'editorconfig/editorconfig-vim'
 
 ""  Better CSS syntax highlighting.
 Plugin 'hail2u/vim-css3-syntax'
@@ -765,7 +765,7 @@ function! OnEnter()
   cd ~/Documents
 
   ""  Show NERDTree.
-  call EyeTreeToggle()
+  "call EyeTreeToggle()
 
   " vim-indent-guides plugin colors
   hi! IndentGuidesOdd  guibg=#162636
