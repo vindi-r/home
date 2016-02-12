@@ -1,5 +1,0 @@
-Control-o: history-search-backward
-Control-l: history-search-forward
-Control-_: clear-screen
-set completion-ignore-case On
-
