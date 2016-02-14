@@ -788,4 +788,7 @@ function! OnEnter()
 
 endfunc
 au VimEnter * call OnEnter()
-
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+highligh lCursor guifg=Red guibg=Cyan
